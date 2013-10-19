@@ -4,11 +4,21 @@
 # @autor Dominik Wille
 # @tutor Alexander Schlaich
 # @exercise 1.1
+#
+# This is my very small script to calculate the length of the mantissa in
+# different cases. The script will start at some value a and devide it
+# by 2 until it doesn't chnage any longer. The values of a are set up as list.
 
+# Import math-Modulte so do some log calculations.
 import math
 
-e = 1.0
+#List of a values that should be calculated.
 list = [1.0, 1.1*10**(-5), 10**(-30), 5*10**(12)]
+
+#First value of e
+e = 1.0
+
+#The results-list will be filled with tupels (a, e).
 results = []
 
 for a in list: 
@@ -25,28 +35,30 @@ for (a, e) in results:
         maxlen = len(str(a))
 
 
-print 'Aufgabe 1.1.1:\n'
+print 'Exeecise 1.1.1:\n'
 
 #print all results
 for (a, e) in results:
     l = len(str(a))
     fill = (maxlen - l) * ' '
     man = int(-math.log(e, 2) - 1)
-    print '    a=' + str(a) + fill + ' e=' + str(e) + ' das entspricht einer ' + str(man) + '-stelligen Mantisse'
+    print '    a=' + str(a) + fill + ' e=' + str(e) + ' => ' + str(man) + '-Bit mantissa'
+
+# My machine gives me the following output:
+#
+# a=1.0           e=1.11022302463e-16 => 52-Bit mantissa
+# a=1.1e-05       e=8.47032947254e-22 => 69-Bit mantissa
+# a=1e-30         e=8.75811540203e-47 => 152-Bit mantissa
+# a=5000000000000 e=8.75811540203e-47 => 152-Bit mantissa
+#
+# that's kind of strange, never heard of a 69- or 152-Bit mantissa...
 
 
-# a=1.0           e=1.11022302463e-16
-# a=1.1e-05       e=8.47032947254e-22
-# a=1e-30         e=8.75811540203e-47
-# a=5000000000000 e=8.75811540203e-47
+print '\nExercise 1.1.2:\n'
+print '    The value of e is the smallest relative differende.'
 
-
-
-print '\nAufgabe 1.1.2:\n'
-print '    Der Wert von e repräsentiert den kleinst möglichen relativen Abstand zweier Zahlen'
-
-print '\nAufgabe 1.1.3:\n'
-print '    Ja kann man, er entspricht dem kleinsten in der Mantisse darstellbaren Wert.'
-print '    Für eine 32-Bit single precision Mantisse sind 23 Bits vorgesehn, d.h. die kleinste darstellabre Zahl ist: \n'
+print '\nExercise 1.1.3:\n'
+print '    Yes that\'s possible, it is the smallest value the mantisse can represent.'
+print '    For a 32-Bit single precision float the mantissa is 23 Bits long, that means the smalest value is: \n'
 print '    2**-(23+1) = ' + str(2**-(23+1))
-print '\n    Die eine 24ste Stelle rührt daher, dass die esrste Stelle der Mantisse sonst imer 1 wäre.'
+print '\n    The extra bit is caused by the fact that every mantissa would start with 1 otherwise.'
