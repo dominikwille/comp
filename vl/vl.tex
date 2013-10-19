@@ -1,0 +1,117 @@
+\input{../../abv/lib/my}
+
+\newcommand{\myTitle}{\LaTeX - Grundlagen}
+\newcommand{\myAuthor}{Dominik Wille}
+\newcommand{\myDate}{22 Oktober 2013}
+\newcommand{\myTitleImage}{images/typesetting} %This Image is GNU GPL licenced.
+\newcommand{\myTitleLeft}{%
+   Freie Universität Berlin\\
+   Zentraleinrichtung für Datenverarbeitung\\
+   Betriebsysteme und Programmieren%
+}
+\newcommand{\myTitleRight}{%
+  Dozent: \\
+  Dr.\,Herbert Voß
+}
+
+\begin{document}
+\myTitlepage
+\section{...}
+\subsection{...}
+\subsection{...}
+\subsection{Rundungsfehler}
+Rechenoperationen mit reelen zahlen im Computer $\rightarrow$ Rundungsfehler.
+\subsubsection{Gleitkommaaritmetik}
+Im Vergleich zum Festpunktformat: geringerer Speicherplatzbedarf. \\ \\
+$n$-stellige Gleitkommazahl, Basis $B$:
+\begin{equation}
+  x = \pm \left(0,z,z_2,...,z_n\right)_B \cdot B^E = \pm \sum_{i=1}^n Z_i \cdot Z_i != 0
+\end{equation}
+(Normalisierte Gleitkommadarstellung)
+Exponent: $E e \mathbb{Z} : m <= E <= M$\\
+Bsp: $+1234,567 = +(0,1234567)_{10}\cdot 10^4$ \\
+($B = 10, n = 7$)
+Die Werte $n,B,m,M$ maschienenabhängig (Hardware und Compiler)
+Übliche Basen:
+\begin{itemize}
+\item $B = 2$ (Dualzahlen, im Computer)
+\item $B = 8$ (Oktalzahlen)
+\item $B = 10$ (Dezimal)
+\item $B = 16$ (Hexdezimal)
+\end{itemize}
+Bsp: binäre Darstellung: 
+\begin{align}
+(5,0625)_{10} &= 0,50625 \cdot 10^1 \\
+&= 1 \cdot 2^2 + 1 \cdot 2^0 + 0 \cdot 2^{-1} + 0 \cdot 2^{-2} + 0 \cdot 2^{-3} + 1 \cdot 2^{-4} \\
+  = (101,0001)_2 &= (0,1010001)_2 \cdot 2^{3}
+\end{align}
+manche Zahlen lassen sich nur schwer als Dualzahlen darstellen:\\
+\begin{itemize} 
+\item $(3)_{10} = (11)_2$ geht
+\item $(0,3)_{10} = 0 \cdot 2^{-1} + 1 \cdot 2^{-2} + ... = (0,010011001...)_2$ geht nicht
+\end{itemize}
+\textbf{Genauigkeit der Darstellung} \\ \\
+23 Stellen $\Roghtarrow$ $11111111111111111111111 = 2^{23} - 1 = 8.388.608$ \\
+$\Rightarrow$ 6 Ziffren können unterschieden werden. \\ \\
+52 Stellen $2^{52} = 4.503.599.627.370.496$\\
+$\Rightarrow$ 15 Stellen können unterschienden werden.
+Die größte darstellbare Zahl entspricht der größten Maschienenzahl.
+\begin{align}
+x_{max} = (0,[B-1][B-1]...[B-1])_B \cdot B^M = (1-B^{-n}) \cdot B^M 
+\end{align}
+kleinste darstellbare Zahl
+\begin{align}
+x_{min} = (0,1000000)_B \cdot B^m = (1-B^{-n}) \cdot B^{m-1} 
+\end{align}
+\begin{center}
+  $\Rightarrow$ \textit{Die menge der Maschienenzahlen ist endlich}
+\end{center}
+\underline{Bsp:}\\
+$x_{max} + x_{max} = \infty$ \\
+$x_{min} \cdot B^{-1} = 0
+\subsubsection{Rundungsfehler}
+Beim runden einer Zahl $x$ wird eine Näherung $rd(x)$ unter den Maschienenzahlen geliefert,  so dass der absolute Fehler $\left|x-rd(x)\right|$ minimal ist, der unvermeidbare Fahler ist der Rundungsfehler. Eine $n$-stellige Dezimalzahl im Gleitkommaformat
+\begin{align}
+  x = \pm (0,z_1,...,z_n)_{10}=rd(x)
+\end{align}
+hat einen maximalen absoluten Fehler : 
+\begin{align}
+  \left| x - rd(x)\right| &<= 0,000..005 \cdot 10^E \\
+  &= 0,5 \cdot E^{E-n}
+\end{align}
+, für allgemeine Basis $B$:
+\begin{align}
+  \left|x-rd(x)\right| <= \frac{B \cdot 1}{2 \cdot B} B^{E-n} = \frac{1}{2} B^{E-n}
+\end{align}
+\underline{Rundungsfehler werden durch die rechnung getragen!} \\ \\
+$n$-stellige Gleitkommaaritmetik: \\
+jede einzelne Rechenoperation ($+,-,\times,\div$)wird auf $n+1$ Stellen genau berechnet und dann auf n stellen gerundet. Jedes Zwischenergebnis, nicht Endergebnis! \\ \\
+\underline{Bsp:} \\ 
+rechne $2590 + 4 + 4 $ in 3 stelliger dez G.P.A.
+\begin{description}
+\item [links]
+\begin{enumerate}
+\item $2590 + 4 \rightarrow 2590$
+\item $2590 + 4 \rightarrow 2590$
+\end{enumerate}
+\item [rechts]
+\begin{enumerate}
+\item $4 + 4 \rightarrow 10$
+\item $2590 + 10 \rightarrow 2600$
+\end{enumerate}
+\end{description}
+
+\begin{center}
+$\Rightarrow$ Rechenwege unterscheiden sich! \\
+\end{center}\\ \\
+\textit{\textbf{Regel:} beim Addieren Summanden in der Reihenfolge aufsteigender Beträge addieren.} \\ \\
+Maß für der Rechenzeit eines Computers: ``flops'' floating point operations per second \\
+(typisch Multiplikation oder Division) \\
+(top500.org) #1 Tiake-2 3 Mio Cores, 54.000 T Flops, 17 MW\\ \\
+relative Fehler wichtiger aks absoluter Fehler:\\
+Näherung $\tilde{x}$ zu exaktem wert $x$, rel. fehler 
+$E = \left|\frac{\tiilde{x}-x}{x}\approx\frac{\tiilde{x}-x}{\tilde{x}}$ 
+für duale rechniungen am Computer B=2 $\rightarrow E_{max} = 2^{-n}$ \\
+$E_{max}$ wird auch maschienenzahlgenauigkeit genannt, und gibt die kleinste potentielle Zahle an, für die gilt
+$\left|E_{max}\right|$ ; $E_{max}$ kann aus Rechenergebnissen errechnet werden (ÜB1)
+\end{document}
