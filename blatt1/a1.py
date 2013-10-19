@@ -55,7 +55,7 @@ for (a, e) in results:
 
 
 print '\nExercise 1.1.2:\n'
-print '    The value of e is the smallest relative differende.'
+print '    The value of e is the smallest relative difference.'
 
 print '\nExercise 1.1.3:\n'
 print '    Yes that\'s possible, it is the smallest value the mantisse can represent.'
