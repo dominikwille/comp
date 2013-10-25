@@ -1,6 +1,8 @@
 #!/usr/local/bin/python
 # -*- coding: utf-8 -*-
 
+import sys
+
 def area (a, b):
     if ( a >= 0 and b >= 0 ):
         return a * b
@@ -31,7 +33,18 @@ def input_n (str):
         x = raw_input(str);
     return float(x)
 
-a = input_n('Länge a des Rechtecks: ')
-b = input_n('Länge b des Rechtecks: ')
+a = b = -1
 
-print "das rechteck hat einen Flächeninhalt von: %s" % (print_area(a, b))
+inp = sys.argv
+
+if(len(inp) >= 2 and isfloat(inp[1])):
+    a = float(inp[1])
+if(len(inp) >= 3 and isfloat(inp[2])):
+    b = float(inp[2])
+
+if(a < 0):
+    a = input_n('Länge a des Rechtecks: ')
+if(b < 0):
+    b = input_n('Länge b des Rechtecks: ')
+
+print "das Rechteck hat einen Flächeninhalt von: %s" % (print_area(a, b))
