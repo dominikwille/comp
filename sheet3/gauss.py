@@ -24,9 +24,20 @@ for j in range (0,F.shape[0]-1):
 print F
 print d
 
-c=d[2]/F[2,2]
-print c
-b=(d[1]-F[1,2]*c)/F[1,1]
-print b
-c=(d[0]-F[0,1]*b-F[0,2]*c)/F[0,0]
-print c
+#Kontrollausgabe
+#c=d[2]/F[2,2]
+#print c
+#b=(d[1]-F[1,2]*c)/F[1,1]
+#print b
+#c=(d[0]-F[0,1]*b-F[0,2]*c)/F[0,0]
+#print c
+
+#Berechnung des Lösungsvektors
+l = np.matrix ('0.;0.;0.')
+mod = 0
+for i in range(2, -1, -1):
+    for j in range(i,2):
+        mod = mod+F[i,j+1]*l[j+1]
+    l[i] = (d[i]-mod)/F[i,i]
+    mod = 0
+print l[::-1]
