@@ -17,6 +17,12 @@ def mrnd(x, N):
     f = np.vectorize(mround)
     return f(x, N)
 
+def is_pos_def(x):
+    for i in np.linalg.eigvalsh(x):
+        if i <= 0:
+            return False
+    return True
+
 F_ = np.matrix( [ [1.0, -2.0, -1.0], [36000.0, 2.0, 0.0], [-2.0, 1400.0, 1.0] ] )
 d_ = np.matrix([[3.0], [72002.0], [1399.0]])
 
@@ -136,11 +142,13 @@ print '\n\n Exercise 3.1.3: '
 print d
 print 'Wie zu sehen ist hilft die pivotisierung dabei den Fehler gering zu halten.'
 
-#Exercise 3.2:
+#Exercise 3
 
 A_ = np.matrix([[64.0, -40.0, 16.0], [-40.0, 29.0, -4.0], [16.0, -4.0, 62.0]])
 E_ = np.matrix([[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]])
 dim = 3
+
+#Exercise 3.2.1:
 
 F = np.copy(A_)
 d = np.copy(E_)
@@ -155,6 +163,9 @@ while(k < dim):
         i += 1
     k += 1
 
+L_ = np.copy(d)
+R_ = np.copy(F)
+    
 print '\nExercise 3.2.1: '
 print '\nL = '
 print d
@@ -162,3 +173,80 @@ print '\nR = '
 print F
 print '\nL * R = '
 print np.mat(d) * np.mat(F)
+
+#Exercise 3.2.2:
+print '\nExercise 3.2.2: '
+
+R = np.copy(A_)
+if(is_pos_def(R)):
+    i = 0
+    while(i < dim):
+        j = 0
+        while(j < dim):
+            k = 0
+            sum = R[i,j]
+            while(k < j - 2):
+                sum = sum - R[i, k] * R[j, k]
+            k += 1
+            if(i > j):
+                R[i, j] = sum / R[j, j]
+            elif(sum > 0):
+                R[i,i] = sum**0.5
+            else:
+                print 'err'
+            j += 1
+        i += 1 
+    print R
+    print np.linalg.cholesky(A_)
+    print np.linalg.cholesky(A_) * np.transpose(np.linalg.cholesky(A_))
+else:
+    print 'Matrix ist nicht positiv definit.'
+print 'Da stimmt iregdwas nicht....'
+
+#Exercise 3.2.3
+print '\nExercise 3.2.3:'
+
+R = R_
+L = L_
+
+#erzeuge y.
+
+b = np.matrix([[-8.0], [15.0], [34.0]])
+y = np.copy(b)
+
+k = dim - 2
+while(k >= 0):
+    i = k + 1
+    while(i < dim):
+        m = float(L[i,k]) / float(L[k,k])
+        L[i] -= L[k] * m
+        y[i] -= y[k] * m
+        i += 1
+    k -= 1
+
+print 'y = '
+print y
+
+#erzeuge x.
+
+k = 0
+while(k < dim):
+    y[k] /= R[k,k]
+    R[k] /= R[k,k]
+    k += 1
+
+x = np.copy(y)
+k = 0
+while(k < dim - 1):
+    i = k + 1
+    while(i < dim):
+        f = R[i] * R[k,i] / R[i,i]
+        x[k] -= x[i] * R[k,i] / R[i,i]
+        R[k] -= f
+        i += 1
+    k += 1
+
+print 'x = '
+print x
+
+
