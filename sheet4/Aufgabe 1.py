@@ -164,7 +164,7 @@ gaussseidel(L,D,R,b,0)
 
 #4.1.5
 import matplotlib.pyplot as plt
-from scipy.signal import argrelextrema
+#from scipy.signal import argrelextrema
 #Zum Plotten wurde eine neue Funktion definiert und der entstandene Plot wurde als
 #Figure 1 exportiert. Am Plot lässt sich erkennen, dass das Verfahren für alle
 #Werte in (0,2) mit ausnahme eines w-Wertes bei ca 1,1. 
