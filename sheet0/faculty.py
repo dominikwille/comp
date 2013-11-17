@@ -63,10 +63,21 @@ def input_integer(str):
     return x
 
 def faculty(n):
-    if(n <= 1):
-        return 1;
-    else:
-        return faculty(n - 1) * n
+    result = 1
+    for i in range(1, n+1):
+        result *= i
+    return result
+
+    # result = 1
+    # while(n > 1):
+    #     result *= n
+    #     n -= 1
+    # return result
+
+    # if(n <= 1):
+    #     return 1;
+    # else:
+    #     return faculty(n - 1) * n
         
 def print_faculty(n):
     if(n.isdigit() and n >= 0):
@@ -78,10 +89,3 @@ def print_faculty(n):
 n = input_integer('geben sie eine Zahl ein: ')
 
 print "Die fakultät von %s ist: %s" % (n, print_faculty(n))
-
-if(1):
-    print '1 ist wahr'
-if(1.1):
-    print '1.1 ist wahr'
-if(0.0):
-    print '0.0 ist nicht wahr'

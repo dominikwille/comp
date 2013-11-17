@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (Web2C 2012) (format=pdflatex 2013.10.4)  17 OCT 2013 13:56
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (Web2C 2012) (format=pdflatex 2013.10.4)  22 OCT 2013 13:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -965,7 +965,6 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 117.
 
 Underfull \hbox (badness 10000) in paragraph at lines 107--117
 
@@ -977,44 +976,133 @@ Underfull \hbox (badness 10000) in paragraph at lines 107--117
  []
 
 [4]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 117.
+
+! LaTeX Error: \begin{enumerate} on input line 133 ended by \end{description}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.145   \end{description}
+                         
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 174--179
+
+ []
+
+! Undefined control sequence.
+l.189 ... Fehlers für $f(x) = \sin{x} \Rifgtarrow
+                                                   f'(x) = \cos{x}$ und damit
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! Package inputenc Error: Unicode char \u8:´ not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.201 ...tor für relative fehler; ,,qualitativ:´
+                                                  ´ Probleme zur Koordinate...
+
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! Package inputenc Error: Unicode char \u8:´ not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.201 ...r für relative fehler; ,,qualitativ:´´
+                                                   Probleme zur Koordinatenz...
+
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[6]
+! Undefined control sequence.
+l.212 ...ig$, für $c e \mathbb{R}$ mit $f(a) \leg
+                                                   c \leq f(b))$ gibt
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: \begin{description} on input line 119 ended by \end{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.233 \end{document}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 233.
+[7]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 233.
  (./vl.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 117.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 117.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 233.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 233.
 Package rerunfilecheck Info: File `vl.out' has not changed.
-(rerunfilecheck)             Checksum: 09E0B92F370D0AD8254F0D4EF1E7E269;356.
+(rerunfilecheck)             Checksum: 08ADC41C780976FC53C931DD4BA323F1;671.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 117.
- ) 
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 233.
+ )
+(\end occurred inside a group at level 1)
+
+### semi simple group (level 1) entered at line 119 (\begingroup)
+### bottom level 
 Here is how much of TeX's memory you used:
- 19498 strings out of 493488
- 256535 string characters out of 3144332
- 465238 words of memory out of 3000000
- 22547 multiletter control sequences out of 15000+200000
+ 19520 strings out of 493488
+ 256783 string characters out of 3144332
+ 468238 words of memory out of 3000000
+ 22552 multiletter control sequences out of 15000+200000
  148521 words of font info for 100 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 47i,8n,47p,323b,391s stack positions out of 5000i,2500n,10000p,300000b,50000s
-{/usr/local/share/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/share/te
-xmf-dist/fonts/enc/dvips/libertine-legacy/xl-8x.enc}</usr/local/share/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/share/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmmi10.pfb></usr/local/share/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmmi8.pfb></usr/local/share/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr10.pfb></usr/local/share/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr8.pfb></usr/local/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-</usr/local/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/loc
-al/share/texmf-dist/fonts/type1/public/libertine-legacy/fxbb.pfb></usr/local/sh
-are/texmf-dist/fonts/type1/public/libertine-legacy/fxlb.pfb></usr/local/share/t
-exmf-dist/fonts/type1/public/libertine-legacy/fxlbi.pfb></usr/local/share/texmf
--dist/fonts/type1/public/libertine-legacy/fxlr.pfb></usr/local/share/texmf-dist
-/fonts/type1/public/libertine-legacy/fxlri.pfb></usr/local/share/texmf-dist/fon
-ts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on vl.pdf (4 pages, 490604 bytes).
+ 47i,8n,47p,323b,491s stack positions out of 5000i,2500n,10000p,300000b,50000s
+{/usr/local/share/texmf-dist/fonts/enc/dvips/libertine-legacy/x
+b-8x.enc}{/usr/local/share/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/s
+hare/texmf-dist/fonts/enc/dvips/libertine-legacy/xl-8x.enc}</usr/local/share/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/share/texmf-dist
+/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/local/share/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/share/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmmi6.pfb></usr/local/share/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmmi8.pfb></usr/local/share/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr10.pfb></usr/local/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pf
+b></usr/local/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/lo
+cal/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/shar
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/share/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/share/texmf-dist/fonts
+/type1/public/libertine-legacy/fxbb.pfb></usr/local/share/texmf-dist/fonts/type
+1/public/libertine-legacy/fxlb.pfb></usr/local/share/texmf-dist/fonts/type1/pub
+lic/libertine-legacy/fxlbi.pfb></usr/local/share/texmf-dist/fonts/type1/public/
+libertine-legacy/fxlr.pfb></usr/local/share/texmf-dist/fonts/type1/public/liber
+tine-legacy/fxlri.pfb></usr/local/share/texmf-dist/fonts/type1/public/amsfonts/
+symbols/msbm10.pfb>
+Output written on vl.pdf (7 pages, 545170 bytes).
 PDF statistics:
- 126 PDF objects out of 1000 (max. 8388607)
- 105 compressed objects within 2 object streams
- 25 named destinations out of 1000 (max. 500000)
- 49 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 189 PDF objects out of 1000 (max. 8388607)
+ 161 compressed objects within 2 object streams
+ 42 named destinations out of 1000 (max. 500000)
+ 81 words of extra memory for PDF output out of 10000 (max. 10000000)
 

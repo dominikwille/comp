@@ -48,8 +48,8 @@ for (a, e) in results:
     print '    a=' + str(a) + fill + ' e=' + str(e) + ' => ' + str(man1) + str(man)
 
 print '\nExercise 1.1.2:\n'
-print '    The value of e is the smallest value that can be added to a.'
+print '    e is the machine epsilon.'
 
 print '\nExercise 1.1.3:\n'
 print '    The value can be calculated. it is the smallest mantissa (000000...) and the smallest exponent'
-print '    (00000...). For 32-Bit this means 0.5 * 2**(-7) = ' + str(0.5 * 2.0**(-7))
+print '    (00000...). For 32-Bit this means 0.5 * 10**(-7) = ' + str(0.5 * 10**(-7))

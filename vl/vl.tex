@@ -114,4 +114,120 @@ $E = \left|\frac{\tiilde{x}-x}{x}\approx\frac{\tiilde{x}-x}{\tilde{x}}$
 für duale rechniungen am Computer B=2 $\rightarrow E_{max} = 2^{-n}$ \\
 $E_{max}$ wird auch maschienenzahlgenauigkeit genannt, und gibt die kleinste potentielle Zahle an, für die gilt
 $\left|E_{max}\right|$ ; $E_{max}$ kann aus Rechenergebnissen errechnet werden (ÜB1)
+\newpage
+\textbf{Bsp:} mit 4 mantissenziffern und Exponentenziffern
+\begin{description}
+\item[Addieren/Subtrahieren]
+  von zahlen mit stark unterschiedlichem Exponenten: kleine Zahl kann durch Rundungsfehler verloren gehen.
+  \begin{align}
+    1234 + 0,5 &= 0,1234 \cdot 10^4 + 0,5 \cdot 10^0 \\
+    &= 1234,5 \rightarrow 1235
+    Fehler
+  \end{align}
+\item[Multiplikation/Division] (underflor/ oder flor möglich!)
+  \begin{align}
+    0,2 \cdot 10^{-5} \times 0,3 \cdot 10^{-6} &= 0,6 \cdot 10^{-12} \rightarrow 0 \\
+    0,6 \cdot 10^5 \div 0,3 \cdot 10^{-6} &= 0,2 \cdot 10^{12} \rightarrow \infty
+  \end{align}
+\item[Fehler des Assoziativgesetzes]
+  \begin{enumerate}
+    \item[a)]
+      \begin{align}
+        x + ( y + z) &= (x + y) + z \\
+        0,1111 \cdot 10^{-3} + (-0,1234 + 0,1243) &= 0,1111 \cdot 10^{-3} + 0,0009 \\
+        &=0,10111 \cdot 10^{-2} \rightarrow 0,1011 \cdot 10^{-2}
+      \end{align}
+    \item[b)]
+      \begin{align}
+        (0,1111 \cdot 10^{-3} - 0,1234) + 0,1243 = 0,1233 + 0,1243 \\
+        &= 0,0010 = 0,100 \cdot 10^{-2}
+      \end{align}
+  \end{description}
+  \begin{enumerate}
+    \item[a)] Fehler: $0,00001 \cdot 10^{-2} \rightarrow $ relativer fehler $\epsilon = 0,0001 = 0,01\% $
+    \item[b)] Fehler: $0,00111 \cdot 10^{-2} \rightarrow $ relativer Fehler $\epsilon = 0,01 = 1\% $
+  \end{enumerate}
+  $\epsilon_{max} = \frac{1}{2} B^{1-4} = 0,0005$ ; im Fall b) ist $\epsilon$ also deutlich größer als $\epsilon_{max}$ !
+  \subsubsection{Fehlerfortpflanzung bei Rechenoperationen}
+  Fehler werden beim rechnen weitergetragen, selten werden Fehler dabei kleiner (meistens größer!). Durch Umstellen von Formeln können Fehler minimiert werden, trotzdem müssen Fehler abgeschätzt wreden.
+  \begin{description}
+    \item[Additionsfehler] gegeben fehlerhaste Größen $\tilde{x}$ und $\tilde{y}$ und exakten Werte $x, y$
+      Fehler der Summe: $\tilde{x} + \tilde{y} - (x+y = (\tilde{x} - x) + (\tilde{y} - y)$
+      Im ungünstigsten Fall addieren sich die Fehler:
+
+      $\rightarrow$ \textit{bei Addition und Subtraktion addieren sich die Absolutbeträge der Fehler!}
+    \item[Multiplikation]
+      $\tilde{x} \tilde{y} - x y = \tilde{x}( \tilde{y} -y ) +\tilde{y} ( \tilde{x} -x)(\tilde{y} - y)$ \\
+      also hat das Prodult von $\tilde{y}$ mit einer maschienenzahl ohne Fehler $(\tilde{x} - x$ den $\tilde{x}$-fachen Fehler (und umgekehrt); Prodult der Fehler - typischer Weise vernachlässigbar.
+
+      $\rightarrow$ \textit{der absolute Fehler eines Prodults ist gegeben durch das Prodult des Faktors mit dem Fehler des anderen Faktors. (=2 Treme, oft ist einer der Terme dominant.)}
+
+  Reative Fehler eines Produktes:
+  \begin{equation}
+    \frac{\tilde{x} \tilde{y} - x y}{\tilde{x} \tilde{y}} = \frac{\tilde{y} -y}{\tilde{y}} + \frac{\tilde{x} - x}{\tilde{x}} - \frac{(\tilde{x}-x)(\tilde{y} - y)}{\tilde{x} \tilde{y}}
+  \end{equation}
+  $\rightarrow$ \textit{Beim Multiplizieren addieren sich die relativen Fehler.Division analog...}
+  \end{description}
+
+
+  \subsubsection{Fehlerfortpflanzung -> Funktionen}
+  Funktionen auswertung $f(x)$ an Stelle $\tilde{x}$ anstatt $x\, \rightarrow $ großen/kleinen Fehler von $f$.
+  bei zweiten Funktionsauswertungen wird der Fehler typischerweise größer...\\
+  Mittelwertsatz: $\int_x^{\tilde{x}}g\left(x'\right) dx' = g(x_0)(\tilde{x} - x)$ \\
+  Mittelwert der Funktion: $ \frac{\int_x^{\tilde{x}}g\left(x'\right) dx'}{\tilde{x} - x} = $ Funktionswert $g(x_0)$
+  an einer unbekannten Stelle $x_0$ im Intervall $(x, \tilde{x})$, (für stetige Funktionen $g(x)$....)\\
+
+  wähle $g(x) = f'(x) \rightarrow \left|f(\tilde{x}) -f(x)\right| = \left|\tilde{x} -x \right| \left|f'(x_0) \right|$ \\
+  $\rightarrow$ \textit{absoluter Fehler vergrößert sich für $\left|f(x_0)\right| > 1$ bzw verkleinert sich für $\left|f(x_0)\right| < 1$}
+
+  also: Ableitung bestimmt den Verstärkungsfaktor des Fehlers!
+
+  \underline{Abschätzung} des absoluten Fehlers: $\left|f(x) - f(\tilde{x})\right| \leq M \left|x - \tilde{x}\right|$
+  mit $M = \left| f'(x_0) \right|$ \\
+  Schätzung der Fehler: $\left|f(x) - f(\tilde{x}) \right| \approx \left|f'(\tilde{x})\right|\left|x - \tilde{x}\right|$
+
+  \underline{Bsp.:}Fortpflanzung des absoluten Fehlers für $f(x) = \sin{x} \Rifgtarrow f'(x) = \cos{x}$ und damit
+  $M = max_{x_0} f'(x_0) = 1$ d.h. für die meisten Argumente veringert sich der absolute Fehler! 
+
+  \underline{Bsp.:} $f(x) = \sqrt{x} ; f'(x) = \frac{0,5}{\sqrt{x}}$divergiert also für $x \rightarrow \infty$
+
+  \underline{relativer Fehler bei Funktionsauswertung: }%%  $\frac{f(x) - f(\tilde{x})}{\left|f(x)\right| \leg
+  %% \frac{M\left x \right|}{\left|f(x)\right|} \cdot \frac{\left|x - \tilde{x} \right|}{\left| x \right| \approx
+  %% \frac{\left|f'(\tilde{x})\right|\left|\tilde{x}\right|}{\left|f(\tilde{x})\right| \cdot
+  %%   \frac{\left| x - \tilde{x}\right|}{\left|\tilde{x}\right|}}
+
+  Konditionszahl: $\frac{\left|f'(\tilde{x})\right|\left|\tilde{x}\right|}{\left|f(\tilde{x})\right|}$
+
+  Verhältnisfaktor für relative fehler; ,,qualitativ:´´ Probleme zur Koordinatenzahl $>> 1$
+  ''schlech
+
+\section{Nullstellenprobleme}
+geg: stetige Funktion $f: \mathbb{R} \rightarrow \mathbb{R}$ \\
+ges: Nullstelle($n$), also $x_0 e \mathbb{R}$ mit $f(x_0) = 0$ \\
+grundsätzlich: 
+\begin{itemize}
+  \item gibt es überhaupt keine Nullstelle ?
+  \item gibt es mehrere?
+\end{itemize}
+Zweischensatz: $f:[a,b] \rightarrow \mathbb{R}, stetig$, für $c e \mathbb{R}$ mit $f(a) \leg c \leq f(b))$ gibt
+es ein $x_0 e [a,b]$ so dass $ f(x_0) = c$
+
+für $c = 0$ ist der Satz hilfreich bei der Nullstellensuche:
+
+suche Funktionsargumente mit unterschiedlichem Vorzeichen $f(a)f(b) < 0$ dann gibt es zwischen $a$ und $b$ mindestens eine Nullstelle!
+\subsection{Bisektionsverfahren}
+$f(a)f(b) < 0 = $ Nullstelle in $(a,b)$, berechne Vorzeichen von $f\left(\frac{a+b}{2}\right)$ \\
+$\rightarrow f(x) = 0 in \left(0, \frac{a+b}{2}\right) $ oder $ \left(\frac{a+b}{2}, b\right)$ \\
+weiter halbieren...
+
+\underline{Bsp.:} $f(x) = x^3 - x + 0,3 = 0 $
+\begin{enumerate}
+  \item[a)] wie viele Nullstellen?
+    $x^3-x$ hat 3 Nullstellen bei $x = \pm 1, 0$ \\
+    Wir setzten also die Umgebeung von $x = \pm 1, 0 $ \\
+    \begin{tabular}{r|c|c|c|l}
+      x & -2 & -1 & 0,5 & 1 \\\hline
+      f & -5,7 & 0,3 & -0,075 & 0,3
+    \end{tabular}
+\end{enumerate}
 \end{document}
