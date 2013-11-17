@@ -15,7 +15,7 @@ def phi(x, y):
     return x**4 - x**2 + y**4 - 0.2 * y**3 - y**2 + 0.2 * x * y**3
 
 def F(x, y):
-    return np.matrix([[-4.0*x**3 + 2.0*x - 0.2*y**3]], [[-4.0*y**3 + 0.6*y**2 + 2.0*y - 0.6*x*y**2]])
+    return np.matrix([-4.0*x**3 + 2.0*x - 0.2*y**3, -4.0*y**3 + 0.6*y**2 + 2.0*y - 0.6*x*y**2])
 
 def f1(x, y):
     return -4.0*x**3 + 2.0*x - 0.2*y**3
@@ -73,24 +73,24 @@ y = 0.05
 print extremum(x, y)
 
 #4.2.3
-points = []
-minima = []
-minimum = 0
-for x in X:
-    for y in Y:
-        z = extremum(x, y)
-        x_max = z[0]
-        y_max = z[1]
-        H = np.matrix([[f1x(x_max, y_max), f1y(x_max, y_max)], [f2x(x_max, y_max), f2y(x_max, y_max)]])
-        if(neg_def(H)):
-            points.append((x, y , 5))
-        elif(pos_def(H)):
-            if((x_max, y_max) not in minima):
-                minima.append((x_max, y_max))
-                minimum += 1
-            points.append((x, y, minimum))
-        else:
-            points.append((x, y, 0))
+# points = []
+# minima = []
+# minimum = 0
+# for x in X:
+#     for y in Y:
+#         z = extremum(x, y)
+#         x_max = z[0]
+#         y_max = z[1]
+#         H = np.matrix([[f1x(x_max, y_max), f1y(x_max, y_max)], [f2x(x_max, y_max), f2y(x_max, y_max)]])
+#         if(neg_def(H)):
+#             points.append((x, y , 5))
+#         elif(pos_def(H)):
+#             if((x_max, y_max) not in minima):
+#                 minima.append((x_max, y_max))
+#                 minimum += 1
+#             points.append((x, y, minimum))
+#         else:
+#             points.append((x, y, 0))
 
 # fig = plt.figure()
 # ax = fig.add_subplot(111, projection='3d')
@@ -99,3 +99,14 @@ for x in X:
 # plt.show()
 
 #4.2.4
+x = 0.05
+y = 0.05
+d = 0.1
+e = 0.01
+
+while(np.linalg.norm(F(x, y)) > d):
+    z = F(x, y)
+    x += e*z[0,0]
+    y += e*z[0,1]
+
+print [x, y]
