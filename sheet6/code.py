@@ -74,7 +74,26 @@ B = np.matrix(B)
 b = np.linalg.solve(B.T*B,B.T*y.T)
 print b
 
-#Exercise 1c)
+  
+def F1(x):
+	y = 0
+	for i in range(len(a)):
+		y += a[i]*f1(x,i)
+	return y
+
+def F2(x):
+	y = 0
+	for i in range(len(b)):
+		y += b[i]*f1(x,i)
+	return y
+	
+
+	
+	
+#sum = 0
+#for i in range(n):
+#	sum +=
+       
 
 plt.subplot(211)
 plt.plot(dat('data')[0], dat('data')[1], 'bs')
