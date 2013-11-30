@@ -14,7 +14,7 @@ import os
 
 #6.1
 #Daten einlesen:
-def dat(x):
+def dat(x, del = "\t", offset = 0):
     fn = os.path.join(os.path.dirname(__file__), x)
 
     data = np.genfromtxt(fn, delimiter = "\t")
@@ -172,3 +172,13 @@ def ga1(a0,a1,a2,t):
 def ga2(a0,a1,a2,t):
 	return np.exp(-a0*t)*np.sin(a1*t)
 
+
+
+t = dat('data2')[0]
+y = dat('data2')[1]
+n = len(x)
+
+k = 4
+D = np.empty([n, k])
+for i in range(k):
+    D[:,i] = np.vectorize(fa)(i, a, t)
