@@ -145,17 +145,20 @@ plt.ylabel('Doenerpreis in Euro')
 
 #6.2
 #Funktionen und partielle Ableitungen
-def f(a0,a1,a2,a3,t):
-	return np.exp(-a0*t)*(a2*np.sin(a1*t)+a3*np.cos(a1*t))
+def f(a, t):
+	return np.exp(-a[0]*t)*(a[2]*np.sin(a[1]*t)+a3*np.cos(a[1]*t))
 
-def fa0(a0,a1,a2,a3,t):
-	return -t*np.exp(-a0*t)*(a2*np.sin(a1*t)+a3*np.cos(a1*t))
-	
-def fa1(a0,a1,a2,a3,t):	
-	return t*np.exp(-a0*t)*(a2*np.cos(a1*t)-a3*np.sin(a1*t))
-
-def fa2(a0,a1,t):
-	return np.exp(-a0*t)*np.cos(a1*t)
+def fa(i, a, t):
+    if(i == 0):
+        return -t*np.exp(-a[0]*t)*(a[2]*np.sin(a[1]*t)+a[3]*np.cos(a[1]*t))
+    elif(i == 1):
+        return t*np.exp(-a[0]*t)*(a[2]*np.cos(a[1]*t)-a[3]*np.sin(a[1]*t))
+    elif(i == 2):
+        return np.exp(-a[0]*t)*np.sin(a[1]*t)
+    elif(i == 3):
+        return np.exp(-a[0]*t)*np.cos(a[1]*t)
+    else:
+        return 0
 
 def g(a0,a1,a2,t):
 	return np.exp(-a0*t)*a2*np.sin(a1*t)
@@ -168,3 +171,4 @@ def ga1(a0,a1,a2,t):
 	
 def ga2(a0,a1,a2,t):
 	return np.exp(-a0*t)*np.sin(a1*t)
+
