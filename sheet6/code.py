@@ -191,33 +191,36 @@ t = dat('data2', " ", 0)[0]
 y = dat('data2', " ", 0)[1]
 n = len(t)
 
-k = 4
+m = 4
 
 
-#set a0
-a0 = a1
 
-def Jac(funca, n, k, a, t):
-    D = np.empty([n, k])
-    for i in range(k):
+
+def Jac(funca, n, m, a, t):
+    D = np.empty([n, m])
+    for i in range(m):
         D[:,i] = np.vectorize(funca, excluded=[0, 1])(i, a, t)
     return np.matrix(D)
 
 
 #iterate
-def iterate(func, funca, n, k, a0, t, stop = 1e-6):
+def iterate(func, funca, n, m, a0, t, stop = 1e-6, damping = False):
     a = a0
     while(True):
         a_old = a
         g = np.matrix(y - np.vectorize(func, excluded=[0])(a, t))
         
-        D = Jac(funca, n, k, a, t)
+        D = Jac(funca, n, m, a, t)
         delta = np.squeeze(np.asarray(np.linalg.solve(D.T*D, D.T*g.T)))
+
+        while(damping):
+            break
         a = a + delta
         print np.linalg.norm(a-a_old)
         if(np.linalg.norm(a-a_old) < stop):
             return a
 
-a = iterate(f, fa, n, k, a0, t, 1e-8)
+
+a = iterate(f, fa, n, m, a1, t, 1e-8)
 print a
 
