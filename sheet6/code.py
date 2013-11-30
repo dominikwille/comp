@@ -24,13 +24,15 @@ def dat(x):
     return x,y
 
 #Definitionen der Teilfunktionen
-def f11(x):
-    return ((x-1970.)/100.)**2.
-
-def f12(x):
-    return ((x-1970.)/100.)
-
-f13 = 1
+def f1(x, f):
+    if(f = 1):
+        return ((x-1970.)/100.)**2.
+    elif(f = 2):
+        return ((x-1970.)/100.)
+    elif(f = 3):
+        return 1
+    else:
+        except('Falscher Funktionsaufruf')
 
 def f21(x):
     return ((x-1970.)/100.)**3.
@@ -49,5 +51,7 @@ for i in range(0,n):
     
 print A
     
+
+
 
        
