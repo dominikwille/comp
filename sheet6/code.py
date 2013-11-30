@@ -1,4 +1,12 @@
-    #Packete einlesen:
+#!/usr/local/bin/python
+# -*- coding: utf-8 -*-
+#
+# @author Dominik Wille
+# @author Stefan Pojtinger
+# @tutor Alexander Schlaich
+# @sheet 6
+#
+#Packete einlesen:
 import numpy as np
 import os
 
@@ -7,16 +15,13 @@ import os
 #Daten einlesen:
 def dat(x):
     fn = os.path.join(os.path.dirname(__file__), x)
-    data = np.genfromtxt(fn, delimiter = '	')
+    data = np.genfromtxt(fn, delimiter = "\t")
     x=np.empty([len(data)])
     y=np.empty([len(data)])
     for i in range(0,len(data)):
         x[i]=data[i,0]
         y[i]=data[i,1]
     return x,y
-
-
-
 
 #Definitionen der Teilfunktionen
 def f11(x):
