@@ -171,6 +171,15 @@ def ga1(a0,a1,a2,t):
 	
 def ga2(a0,a1,a2,t):
 	return np.exp(-a0*t)*np.sin(a1*t)
+	
+a1 = np.array([0.8, 6.4, 4.2,-0.3])
+a2 = np.array([0.3, 5.4, 7.2,-1.3])
+a3 = np.array([1.0, 7.0,-6.0, 3.0])
+b1 = np.array([0.8, 6.4, 4.2])
+b2 = np.array([0.3, 5.4, 7.2])
+b3 = np.array([1.0, 7.0,-6.0])	
+	
+
 
 
 
