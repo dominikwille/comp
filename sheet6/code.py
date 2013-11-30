@@ -8,6 +8,7 @@
 #
 #Packete einlesen:
 import numpy as np
+import matplotlib.pyplot as plt
 import os
 
 
@@ -48,20 +49,12 @@ def f2(x, f):
         return 0
 
 
-
-
-	
-
-
-	
 x = dat('data')[0]
 y = dat('data')[1]
 n = len(x)
  
-
 a_max = 3
 A = np.empty([n,a_max])
-
 
 for i in range(a_max):
 	A[:,i] = np.vectorize(f1)(x, i)
@@ -72,7 +65,6 @@ y = np.matrix(y)
 a = np.linalg.solve(A.T*A,A.T*y.T)
 print a
 
-
 b_max = 3
 B = np.empty([n,b_max])
 for i in range(a_max):
@@ -82,9 +74,15 @@ B = np.matrix(B)
 b = np.linalg.solve(B.T*B,B.T*y.T)
 print b
 
-   
+#Exercise 1c)
 
+plt.subplot(211)
+plt.plot(dat('data')[0], dat('data')[1], 'bs')
+plt.xlabel('Jahr')
+plt.ylabel('Preis in Euro')
 
-
-
-       
+plt.subplot(212)
+plt.plot(dat('data')[0], dat('data')[1], 'bs')
+plt.xlabel('Jahr')
+plt.ylabel('Preis in Euro')
+plt.show()       
