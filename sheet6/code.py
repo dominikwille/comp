@@ -27,36 +27,62 @@ def dat(x):
 
 #Definitionen der Teilfunktionen
 def f1(x, f):
-    if(f == 0):
-        return ((x-1970.)/100.)**2.
+    if(f == 2):
+        return ((x-1970.)/100.)**2
     elif(f == 1):
         return ((x-1970.)/100.)
-    elif(f == 2):
+    elif(f == 0):
         return 1
     else:
         return 0
 
-#Todo: refactor this....
-#
-# def f21(x):
-#     return ((x-1970.)/100.)**3.
 
-# f22 = f12
+def f2(x, f):		
+    if(f == 3):
+        return ((x-1970.)/100.)**2.
+    elif(f == 1):
+        return ((x-1970.)/100.)
+    elif(f == 0):
+        return np.cos((x-1970)/100)
+    else:
+        return 0
 
-# def f23(x):
-#     return np.cos((x-1970)/100)
 
+
+
+	
+
+
+	
 x = dat('data')[0]
 y = dat('data')[1]
 n = len(x)
  
-A = np.empty([n,3])
+
 a_max = 3
+A = np.empty([n,a_max])
+
 
 for i in range(a_max):
-    A[:,i] = np.vectorize(f1)(x, i)
+	A[:,i] = np.vectorize(f1)(x, i)
+	
+	
+A = np.matrix(A)
+y = np.matrix(y)
+a = np.linalg.solve(A.T*A,A.T*y.T)
+print a
 
-print A
+
+a_max = 4
+B = np.empty([n,a_max])
+for i in range(a_max):
+    B[:,i] = np.vectorize(f2)(x, i)
+
+B = np.matrix(B)
+print B.T*B
+print B.T*y.T
+b = np.linalg.solve(B.T*B,B.T*y.T)
+
 
    
 
