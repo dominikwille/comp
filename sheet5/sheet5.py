@@ -1,4 +1,10 @@
 # -*- coding: utf-8 -*-
+#
+
+
+
+
+# -*- coding: utf-8 -*-
 #Packete
 import numpy as np
 import os
@@ -47,7 +53,7 @@ def polyl(z):
         sum = sum+y[i]*l(z,i)
     return sum
    
-     
+
 #5.1.3
 #Dividierte Differenzen, global:dd:
 def f(x,y):
@@ -80,7 +86,7 @@ y1=vpoly(x1)
 y2=vpolyl(x1)
 y3=vpolyd(x1)
 plt.plot(x1,y1,x1,y2,x1,y3,x,y,'bx')
-#plt.show()
+plt.show()
 #Der Plot wurde als figure_1.png exportiert, wie dort zu sehen ist unterscheiden
 #die verschiedenen Verfahren in dem geplotteten Bereich nicht.
 
