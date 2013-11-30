@@ -108,29 +108,29 @@ print sum
 max = 0
 for i in range(n):
 	check = (y[i]-F1(x[i]))**2
-	if check >= max:
+	if check > max:
 		max = check
+		index = i
 print 'Maximaler Fehler für erste Ansatzfunktion:'
 print max
-
+print 'Dieser tritt im folgenden Jahr auf::'
+print x[index]
 
 max = 0
 for i in range(n):
 	check = (y[i]-F2(x[i]))**2
-	if check >= max:
+	if check > max:
 		max = check
+		index = i
 print 'Maximaler Fehler für zweite Ansatzfunktion:'
 print max
-
+print 'Dieser tritt im folgenden Jahr auf::'
+print x[index]
 	   
-	   
-plt.subplot(211)
-plt.plot(dat('data')[0], dat('data')[1], 'bs')
-plt.xlabel('Jahr')
-plt.ylabel('Preis in Euro')
 
-plt.subplot(212)
-plt.plot(dat('data')[0], dat('data')[1], 'bs')
+x = np.arange(1970.,2030.,1.)
+plt.plot(dat('data')[0], dat('data')[1], 'bs', x, np.vectorize(F1)(x), x, np.vectorize(F2)(x))
+plt.legend(('Daten', '$(i)$', '$(ii)$'), loc=1)
 plt.xlabel('Jahr')
-plt.ylabel('Preis in Euro')
-#plt.show()       
+plt.ylabel('Doenerpreis in Euro')
+plt.show()
