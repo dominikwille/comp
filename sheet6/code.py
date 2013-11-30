@@ -101,12 +101,12 @@ sum = 0
 for i in range(n):
 	sum +=(y[i]-F1(x[i]))**2
 
-print 'Abweichung für erste Ansatzfunktion:' 
+print 'Abweichung fÃ¼r erste Ansatzfunktion:' 
 print sum
 
 for i in range(n):
 	sum +=(y[i]-F2(x[i]))**2
-print 'Abweichung für zweite Ansatzfunktion:'
+print 'Abweichung fÃ¼r zweite Ansatzfunktion:'
 print sum
        
 
@@ -116,7 +116,7 @@ for i in range(n):
 	if check > max:
 		max = check
 		index = i
-print 'Maximaler Fehler für erste Ansatzfunktion:'
+print 'Maximaler Fehler fÃ¼r erste Ansatzfunktion:'
 print max
 print 'Dieser tritt im folgenden Jahr auf::'
 print x[index]
@@ -127,7 +127,7 @@ for i in range(n):
 	if check > max:
 		max = check
 		index = i
-print 'Maximaler Fehler für zweite Ansatzfunktion:'
+print 'Maximaler Fehler fÃ¼r zweite Ansatzfunktion:'
 print max
 print 'Dieser tritt im folgenden Jahr auf::'
 print x[index]
@@ -143,7 +143,7 @@ plt.ylabel('Doenerpreis in Euro')
 
 
 
-#6.2.1
+#6.2
 #Funktionen und partielle Ableitungen
 def f(a0,a1,a2,a3,t):
 	return np.exp(-a0*t)*(a2*np.sin(a1*t)+a3*np.cos(a1*t))
