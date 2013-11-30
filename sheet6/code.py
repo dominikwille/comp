@@ -188,12 +188,25 @@ y = dat('data2', " ", 1)[1]
 n = len(x)
 
 k = 4
-D = np.empty([n, k])
+
 
 #set a0
 a = a1
 
-for i in range(k):
-    D[:,i] = np.vectorize(fa)(i, a, t)
+def Jac(n, k, a, t):
+    D = np.empty([n, k])
+    for i in range(k):
+        D[:,i] = np.vectorize(fa)(i, a, t)
+    return np.matrix(D)
 
+
+#iterate
+while(True):
+    a_old = a
+    g = np.vectorize(f)(t) - y
+    D = Jac(n, k, a, t)
+    a = np.linalg.solve(D.T*D, D.T*g)
+    
+    if(np.linalg.norm(a-a_old) < 1e-6):
+        break;
 
