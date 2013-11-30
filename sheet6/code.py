@@ -183,11 +183,17 @@ b3 = np.array([1.0, 7.0,-6.0])
 
 
 
-t = dat('data2')[0]
-y = dat('data2')[1]
+t = dat('data2', " ", 1)[0]
+y = dat('data2', " ", 1)[1]
 n = len(x)
 
 k = 4
 D = np.empty([n, k])
+
+#set a0
+a = a1
+
 for i in range(k):
     D[:,i] = np.vectorize(fa)(i, a, t)
+
+
