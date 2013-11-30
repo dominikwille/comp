@@ -84,17 +84,46 @@ def F1(x):
 def F2(x):
 	y = 0
 	for i in range(len(b)):
-		y += b[i]*f1(x,i)
+		y += b[i]*f2(x,i)
 	return y
-	
 
 	
-	
-#sum = 0
-#for i in range(n):
-#	sum +=
+x = dat('data')[0]
+y = dat('data')[1]	
+sum = 0
+
+
+for i in range(n):
+	sum +=(y[i]-F1(x[i]))**2
+
+print 'Abweichung für erste Ansatzfunktion:' 
+print sum
+
+for i in range(n):
+	sum +=(y[i]-F2(x[i]))**2
+print 'Abweichung für zweite Ansatzfunktion:'
+print sum
        
 
+max = 0
+for i in range(n):
+	check = (y[i]-F1(x[i]))**2
+	if check >= max:
+		max = check
+print 'Maximaler Fehler für erste Ansatzfunktion:'
+print max
+
+
+max = 0
+for i in range(n):
+	check = (y[i]-F2(x[i]))**2
+	if check >= max:
+		max = check
+print 'Maximaler Fehler für zweite Ansatzfunktion:'
+print max
+
+	   
+	   
 plt.subplot(211)
 plt.plot(dat('data')[0], dat('data')[1], 'bs')
 plt.xlabel('Jahr')
@@ -104,4 +133,4 @@ plt.subplot(212)
 plt.plot(dat('data')[0], dat('data')[1], 'bs')
 plt.xlabel('Jahr')
 plt.ylabel('Preis in Euro')
-plt.show()       
+#plt.show()       
