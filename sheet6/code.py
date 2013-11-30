@@ -83,8 +83,13 @@ b = np.linalg.solve(B.T*B,B.T*y.T)
 print b
 
    
+def poly1(x):
+	y = 0
+	for i in range(len(b)):
+		y += b[i]*f1(x,i)
+	return y
 
-
-
-
+#sum = 0
+#for i in range(n):
+#	sum +=
        
