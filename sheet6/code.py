@@ -26,6 +26,7 @@ def dat(x):
         y[i]=data[i,1]
     return x,y
 
+#Linere Ausgleichsrechnung	
 #Definitionen der Teilfunktionen
 def f1(x, f):
     if(f == 2):
@@ -48,11 +49,13 @@ def f2(x, f):
     else:
         return 0
 
-
+#Belegung der Daten
 x = dat('data')[0]
 y = dat('data')[1]
 n = len(x)
  
+ 
+#Berechnung der Koefizienten
 a_max = 3
 A = np.empty([n,a_max])
 
@@ -74,7 +77,8 @@ B = np.matrix(B)
 b = np.linalg.solve(B.T*B,B.T*y.T)
 print b
 
-  
+
+#Definition der Fits 
 def F1(x):
 	y = 0
 	for i in range(len(a)):
@@ -93,6 +97,7 @@ y = dat('data')[1]
 sum = 0
 
 
+#Fehlerrechnung
 for i in range(n):
 	sum +=(y[i]-F1(x[i]))**2
 
@@ -128,9 +133,38 @@ print 'Dieser tritt im folgenden Jahr auf::'
 print x[index]
 	   
 
+#Plot
 x = np.arange(1970.,2030.,1.)
 plt.plot(dat('data')[0], dat('data')[1], 'bs', x, np.vectorize(F1)(x), x, np.vectorize(F2)(x))
 plt.legend(('Daten', '$(i)$', '$(ii)$'), loc=1)
 plt.xlabel('Jahr')
 plt.ylabel('Doenerpreis in Euro')
-plt.show()
+#plt.show()
+
+
+
+#6.2.1
+#Funktionen und partielle Ableitungen
+def f(a0,a1,a2,a3,t):
+	return np.exp(-a0*t)*(a2*np.sin(a1*t)+a3*np.cos(a1*t))
+
+def fa0(a0,a1,a2,a3,t):
+	return -t*np.exp(-a0*t)*(a2*np.sin(a1*t)+a3*np.cos(a1*t))
+	
+def fa1(a0,a1,a2,a3,t):	
+	return t*np.exp(-a0*t)*(a2*np.cos(a1*t)-a3*np.sin(a1*t))
+
+def fa2(a0,a1,t):
+	return np.exp(-a0*t)*np.cos(a1*t)
+
+def g(a0,a1,a2,t):
+	return np.exp(-a0*t)*a2*np.sin(a1*t)
+
+def ga0(a0,a1,a2,t):
+	return -t*np.exp(-a0*t)*a2*np.sin(a1*t)
+	
+def ga1(a0,a1,a2,t):
+	return np.exp(-a0*t)*a2*t*np.cos(a1*t)
+	
+def ga2(a0,a1,a2,t):
+	return np.exp(-a0*t)*np.sin(a1*t)
