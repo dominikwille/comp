@@ -38,7 +38,7 @@ def f1(x, f):
 
 
 def f2(x, f):		
-    if(f == 3):
+    if(f == 2):
         return ((x-1970.)/100.)**2.
     elif(f == 1):
         return ((x-1970.)/100.)
@@ -73,16 +73,14 @@ a = np.linalg.solve(A.T*A,A.T*y.T)
 print a
 
 
-a_max = 4
-B = np.empty([n,a_max])
+b_max = 3
+B = np.empty([n,b_max])
 for i in range(a_max):
     B[:,i] = np.vectorize(f2)(x, i)
 
 B = np.matrix(B)
-print B.T*B
-print B.T*y.T
 b = np.linalg.solve(B.T*B,B.T*y.T)
-
+print b
 
    
 
