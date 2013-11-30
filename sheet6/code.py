@@ -84,7 +84,7 @@ def F1(x):
 def F2(x):
 	y = 0
 	for i in range(len(b)):
-		y += b[i]*f1(x,i)
+		y += b[i]*f2(x,i)
 	return y
 	
 
@@ -95,13 +95,10 @@ def F2(x):
 #	sum +=
        
 
-plt.subplot(211)
-plt.plot(dat('data')[0], dat('data')[1], 'bs')
-plt.xlabel('Jahr')
-plt.ylabel('Preis in Euro')
+x = np.arange(1970.,2030.,1.)
 
-plt.subplot(212)
-plt.plot(dat('data')[0], dat('data')[1], 'bs')
+plt.plot(dat('data')[0], dat('data')[1], 'bs', x, np.vectorize(F1)(x), x, np.vectorize(F2)(x))
+plt.legend(('Daten', '$(i)$', '$(ii)$'), loc=1)
 plt.xlabel('Jahr')
-plt.ylabel('Preis in Euro')
-plt.show()       
+plt.ylabel('Doenerpreis in Euro')
+plt.show()
