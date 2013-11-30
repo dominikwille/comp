@@ -27,14 +27,14 @@ def dat(x):
 
 #Definitionen der Teilfunktionen
 def f1(x, f):
-    if(f = 1):
+    if(f == 0):
         return ((x-1970.)/100.)**2.
-    elif(f = 2):
+    elif(f == 1):
         return ((x-1970.)/100.)
-    elif(f = 3):
+    elif(f == 2):
         return 1
     else:
-        except('Falscher Funktionsaufruf')
+        return 0
 
 #Todo: refactor this....
 #
@@ -51,7 +51,13 @@ y = dat('data')[1]
 n = len(x)
  
 A = np.empty([n,3])
-print np.vectorize(f12)(x)
+a_max = 3
+
+for i in range(a_max):
+    A[:,i] = np.vectorize(f1)(x, i)
+
+print A
+
    
 
 
