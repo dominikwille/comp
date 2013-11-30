@@ -331,7 +331,7 @@ print iteration(x, y)
 
 #4.2.6
 # Man könnte einfach epsilon * F(x,y) subtrahieren anststatt es zu addieren. Der
-# momentan verwendete Algorithmus findet nur Minima! Ist der statert ein extremum,
+# momentan verwendete Algorithmus findet nur Minima! Ist der statwert ein extremum,
 # so bleibt der wert kosntant, deshalb sind auch vereizelt maxima und sattelpunkte
 # zu sehen.
 
