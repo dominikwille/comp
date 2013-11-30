@@ -34,13 +34,16 @@ def f1(x, f):
     else:
         except('Falscher Funktionsaufruf')
 
-def f21(x):
-    return ((x-1970.)/100.)**3.
+#Todo: refactor this....
+#
+# def f21(x):
+#     return ((x-1970.)/100.)**3.
 
-f22 = f12
+# f22 = f12
 
-def f23(x):
-    return np.cos((x-1970)/100)
+# def f23(x):
+#     return np.cos((x-1970)/100)
+
 x = dat('data')[0]
 y = dat('data')[1]
 n = len(x)
