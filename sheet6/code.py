@@ -193,24 +193,29 @@ k = 4
 
 
 #set a0
-a = a1
+a0 = a1
 
-def Jac(n, k, a, t):
+def Jac(funca, n, k, a, t):
     D = np.empty([n, k])
     for i in range(k):
-        D[:,i] = np.vectorize(fa, excluded=[0, 1])(i, a, t)
+        D[:,i] = np.vectorize(funca, excluded=[0, 1])(i, a, t)
     return np.matrix(D)
 
 
 #iterate
-while(True):
-    a_old = a
-    g = np.matrix(y - np.vectorize(f, excluded=[0])(a, t))
-    
-    D = Jac(n, k, a, t)
-    delta = np.squeeze(np.asarray(np.linalg.solve(D.T*D, D.T*g.T)))
-    a = a + delta
-    print np.linalg.norm(a-a_old)
-    if(np.linalg.norm(a-a_old) < 1e-6):
-        break;
+def iterate(func, funca, n, k, a0, t, stop = 1e-6):
+    a = a0
+    while(True):
+        a_old = a
+        g = np.matrix(y - np.vectorize(func, excluded=[0])(a, t))
+        
+        D = Jac(funca, n, k, a, t)
+        delta = np.squeeze(np.asarray(np.linalg.solve(D.T*D, D.T*g.T)))
+        a = a + delta
+        print np.linalg.norm(a-a_old)
+        if(np.linalg.norm(a-a_old) < stop):
+            return a
+
+a = iterate(f, fa, n, k, a0, t, 1e-8)
+print a
 
