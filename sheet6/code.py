@@ -14,16 +14,18 @@ import os
 
 #6.1
 #Daten einlesen:
-def dat(x, del = "\t", offset = 0):
+def dat(x, delim = "\t", offset = 3):
     fn = os.path.join(os.path.dirname(__file__), x)
 
-    data = np.genfromtxt(fn, delimiter = "\t")
-
-    x=np.empty([len(data)])
-    y=np.empty([len(data)])
-    for i in range(0,len(data)):
-        x[i]=data[i,0]
-        y[i]=data[i,1]
+    data = np.genfromtxt(fn, delimiter = delim)
+    
+    x=np.empty([len(data) - offset])
+    y=np.empty([len(data) - offset])
+    j = 0
+    for i in range(0,len(data) - offset):
+        x[j]=data[j,0]
+        y[j]=data[j,1]
+        j += 1
     return x,y
 
 #Linere Ausgleichsrechnung	
@@ -146,7 +148,7 @@ n = len(x)
 #6.2
 #Funktionen und partielle Ableitungen
 def f(a, t):
-	return np.exp(-a[0]*t)*(a[2]*np.sin(a[1]*t)+a3*np.cos(a[1]*t))
+    return np.exp(-a[0]*t)*(a[2]*np.sin(a[1]*t)+a[3]*np.cos(a[1]*t))
 
 def fa(i, a, t):
     if(i == 0):
@@ -183,30 +185,31 @@ b3 = np.array([1.0, 7.0,-6.0])
 
 
 
-t = dat('data2', " ", 1)[0]
-y = dat('data2', " ", 1)[1]
-n = len(x)
+t = dat('data2', " ", 0)[0]
+y = dat('data2', " ", 0)[1]
+n = len(t)
 
 k = 4
 
 
 #set a0
-a = a1
+a = a3
 
 def Jac(n, k, a, t):
     D = np.empty([n, k])
     for i in range(k):
-        D[:,i] = np.vectorize(fa)(i, a, t)
+        D[:,i] = np.vectorize(fa, excluded=[0, 1])(i, a, t)
     return np.matrix(D)
 
 
 #iterate
 while(True):
     a_old = a
-    g = np.vectorize(f)(t) - y
-    D = Jac(n, k, a, t)
-    a = np.linalg.solve(D.T*D, D.T*g)
+    g = np.matrix(np.vectorize(f, excluded=[0])(a, t) - y)
     
-    if(np.linalg.norm(a-a_old) < 1e-6):
+    D = Jac(n, k, a, t)
+    a = np.linalg.solve(D.T*D, D.T*g.T)
+    print np.linalg.norm(a-a_old)
+    if(np.linalg.norm(a-a_old) < 1e-3):
         break;
 
