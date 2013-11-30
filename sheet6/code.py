@@ -193,7 +193,7 @@ k = 4
 
 
 #set a0
-a = a3
+a = a1
 
 def Jac(n, k, a, t):
     D = np.empty([n, k])
@@ -208,9 +208,9 @@ while(True):
     g = np.matrix(y - np.vectorize(f, excluded=[0])(a, t))
     
     D = Jac(n, k, a, t)
-    delta = np.linalg.solve(D.T*D, D.T*g.T)
+    delta = np.squeeze(np.asarray(np.linalg.solve(D.T*D, D.T*g.T)))
     a = a + delta
     print np.linalg.norm(a-a_old)
-    if(np.linalg.norm(a-a_old) < 1e-3):
+    if(np.linalg.norm(a-a_old) < 1e-6):
         break;
 
