@@ -205,10 +205,11 @@ def Jac(n, k, a, t):
 #iterate
 while(True):
     a_old = a
-    g = np.matrix(np.vectorize(f, excluded=[0])(a, t) - y)
+    g = np.matrix(y - np.vectorize(f, excluded=[0])(a, t))
     
     D = Jac(n, k, a, t)
-    a = np.linalg.solve(D.T*D, D.T*g.T)
+    delta = np.linalg.solve(D.T*D, D.T*g.T)
+    a = a + delta
     print np.linalg.norm(a-a_old)
     if(np.linalg.norm(a-a_old) < 1e-3):
         break;
