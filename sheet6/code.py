@@ -15,7 +15,9 @@ import os
 #Daten einlesen:
 def dat(x):
     fn = os.path.join(os.path.dirname(__file__), x)
+
     data = np.genfromtxt(fn, delimiter = "\t")
+
     x=np.empty([len(data)])
     y=np.empty([len(data)])
     for i in range(0,len(data)):
@@ -49,11 +51,9 @@ y = dat('data')[1]
 n = len(x)
  
 A = np.empty([n,3])
-for i in range(0,n):
-    A[i,0] = f11(x[i])
-    
-print A
-    
+print np.vectorize(f12)(x)
+   
+
 
 
 
