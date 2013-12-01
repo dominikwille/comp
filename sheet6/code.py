@@ -221,7 +221,7 @@ def iterate(func, funca, n, m, a0, t, stop = 1e-6, damping = False):
     a = a0
     while(True):
         a_old = a
-        r = np.matrix(y - np.vectorize(func, excluded=[0])(a, t))
+        g = np.matrix(y - np.vectorize(func, excluded=[0])(a, t))
         
 
         D = jac(funca, n, m, a, t)
@@ -334,9 +334,9 @@ plt.plot(x,g(sol,x))
 
 
 
-        print np.linalg.norm(delta)
-        if(np.linalg.norm(delta) < stop):
-            return a
+# print np.linalg.norm(delta)
+# if(np.linalg.norm(delta) < stop):
+#     return a
 
 a = iterate(f, fa, n, m, a3, t, 1e-6, True)
 print a
