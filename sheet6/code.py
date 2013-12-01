@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+﻿#!/usr/local/bin/python
 # -*- coding: utf-8 -*-
 #
 # @author Dominik Wille
@@ -12,8 +12,7 @@ import matplotlib.pyplot as plt
 import os
 
 
-#6.1
-#Daten einlesen:
+#Daten einlesen Hilfsfunktion:
 def dat(x, delim = "\t", offset = 0):
     fn = os.path.join(os.path.dirname(__file__), x)
 
@@ -28,6 +27,10 @@ def dat(x, delim = "\t", offset = 0):
         j += 1
     return x,y
 
+
+
+#6.1
+print 'Aufgabe 6.1'
 #Linere Ausgleichsrechnung	
 #Definitionen der Teilfunktionen
 def f1(x, f):
@@ -57,96 +60,103 @@ y = dat('data')[1]
 n = len(x)
  
  
-# #Berechnung der Koefizienten
-# a_max = 3
-# A = np.empty([n,a_max])
+#Berechnung der Koefizienten
+a_max = 3
+A = np.empty([n,a_max])
 
-# for i in range(a_max):
-# 	A[:,i] = np.vectorize(f1)(x, i)
+for i in range(a_max):
+	A[:,i] = np.vectorize(f1)(x, i)
 	
 	
-# A = np.matrix(A)
-# y = np.matrix(y)
-# a = np.linalg.solve(A.T*A,A.T*y.T)
-# print a
+A = np.matrix(A)
+y = np.matrix(y)
+a = np.linalg.solve(A.T*A,A.T*y.T)
+print 'Die optimalen Paramter für die (i) lauten:'
+print a
 
-# b_max = 3
-# B = np.empty([n,b_max])
-# for i in range(a_max):
-#     B[:,i] = np.vectorize(f2)(x, i)
+b_max = 3
+B = np.empty([n,b_max])
+for i in range(a_max):
+    B[:,i] = np.vectorize(f2)(x, i)
 
-# B = np.matrix(B)
-# b = np.linalg.solve(B.T*B,B.T*y.T)
-# print b
+B = np.matrix(B)
+b = np.linalg.solve(B.T*B,B.T*y.T)
+print 'Die optimalen Paramter für die (ii) lauten:'
+print b
 
 
-# #Definition der Fits 
-# def F1(x):
-# 	y = 0
-# 	for i in range(len(a)):
-# 		y += a[i]*f1(x,i)
-# 	return y
+#Definition der Fit-Funktionen 
+def F1(x):
+	y = 0
+	for i in range(len(a)):
+		y += a[i]*f1(x,i)
+	return y
 
-# def F2(x):
-# 	y = 0
-# 	for i in range(len(b)):
-# 		y += b[i]*f2(x,i)
-# 	return y
+def F2(x):
+	y = 0
+	for i in range(len(b)):
+		y += b[i]*f2(x,i)
+	return y
 
 	
-# x = dat('data')[0]
-# y = dat('data')[1]	
-# sum = 0
+x = dat('data')[0]
+y = dat('data')[1]	
+sum = 0
 
 
-# #Fehlerrechnung
-# for i in range(n):
-# 	sum +=(y[i]-F1(x[i]))**2
+#Fehlerrechnung
+for i in range(n):
+	sum +=(y[i]-F1(x[i]))**2
 
-# print 'Abweichung für erste Ansatzfunktion:' 
-# print sum
+print 'Summe der Fehlerquadrate für (i):' 
+print sum
 
-# for i in range(n):
-# 	sum +=(y[i]-F2(x[i]))**2
-# print 'Abweichung für zweite Ansatzfunktion:'
-# print sum
+for i in range(n):
+	sum +=(y[i]-F2(x[i]))**2
+print 'Summe der Fehlerquadrate für (ii):'
+print sum
        
 
-# max = 0
-# for i in range(n):
-# 	check = (y[i]-F1(x[i]))**2
-# 	if check > max:
-# 		max = check
-# 		index = i
-# print 'Maximaler Fehler für erste Ansatzfunktion:'
-# print max
-# print 'Dieser tritt im folgenden Jahr auf::'
-# print x[index]
+max = 0
+for i in range(n):
+	check = (y[i]-F1(x[i]))**2
+	if check > max:
+		max = check
+		index = i
+print 'Maximaler Fehler für (i):'
+print max
+print 'Dieser tritt im folgenden Jahr auf::'
+print x[index]
 
-# max = 0
-# for i in range(n):
-# 	check = (y[i]-F2(x[i]))**2
-# 	if check > max:
-# 		max = check
-# 		index = i
-# print 'Maximaler Fehler für zweite Ansatzfunktion:'
-# print max
-# print 'Dieser tritt im folgenden Jahr auf::'
-# print x[index]
+max = 0
+for i in range(n):
+	check = (y[i]-F2(x[i]))**2
+	if check > max:
+		max = check
+		index = i
+print 'Maximaler Fehler für (ii):'
+print max
+print 'Dieser tritt im folgenden Jahr auf::'
+print x[index]
 	   
 
-# #Plot
-# x = np.arange(1970.,2030.,1.)
-# plt.plot(dat('data')[0], dat('data')[1], 'bs', x, np.vectorize(F1)(x), x, np.vectorize(F2)(x))
-# plt.legend(('Daten', '$(i)$', '$(ii)$'), loc=1)
-# plt.xlabel('Jahr')
-# plt.ylabel('Doenerpreis in Euro')
-# #plt.show()
+#Plot, wurde als figure_1.png exportiert.
+#x = np.arange(1970.,2030.,1.)
+#plt.plot(dat('data')[0], dat('data')[1], 'bs', x, np.vectorize(F1)(x), x, np.vectorize(F2)(x))
+#plt.legend(('Daten', '$(i)$', '$(ii)$'), loc=1)
+#plt.xlabel('Jahr')
+#plt.ylabel('Doenerpreis in Euro')
+#plt.show()
+print 'Im Jahr 2020 kostet ein Döner nach Ausgleichsunfktion (i):'
+print F1(2020)
+print 'Im Jahr 2020 kostet ein Döner nach Ausgleichsunfktion (ii):'
+print F2(2020)
+
 
 
 
 #6.2
-#Funktionen und partielle Ableitungen
+#Funktionen, partielle Ableitungen und Startparameter
 def f(a, t):
     return np.exp(-a[0]*t)*(a[2]*np.sin(a[1]*t)+a[3]*np.cos(a[1]*t))
 
@@ -193,7 +203,7 @@ n = len(t)
 
 
 
-
+#Implementierung Gauß-Newton mit Dämpfung:
 
 
 def jac(funca, n, m, a, t):
@@ -222,7 +232,6 @@ def iterate(func, funca, n, m, a0, t, stop = 1e-6, damping = False):
     while(True):
         a_old = a
         g = np.matrix(y - np.vectorize(func, excluded=[0])(a, t))
-        
 
         D = jac(funca, n, m, a, t)
         delta = np.squeeze(np.asarray(np.linalg.solve(D.T*D, D.T*g.T)))
@@ -240,27 +249,58 @@ def iterate(func, funca, n, m, a0, t, stop = 1e-6, damping = False):
 
 			
 			
-#Lösungsvektoren			
-sola1 = iterate(f, fa, n, 4, a1, t, 1e-8)
-sola2 = iterate(f, fa, n, 4, a2, t, 1e-8)
-sola3 = iterate(f, fa, n, 4, a3, t, 1e-8)
+#Lösungsvektoren
+print 'Paramter für a) ohne Dämpfung'			
+sola1 = iterate(f, fa, n, 4, a1, t, 1e-6)
+sola2 = iterate(f, fa, n, 4, a2, t, 1e-6)
+sola3 = iterate(f, fa, n, 4, a3, t, 1e-6)
+print sola1
+print sola2
+print sola3
+
+print 'Paramter für b) ohne Dämpfung'
+solb1 = iterate(g, ga, n, 3, b1, t, 1e-6)
+solb2 = iterate(g, ga, n, 3, b1, t, 1e-6)
+solb3 = iterate(g, ga, n, 3, b1, t, 1e-6)
+print solb1
+print solb2
+print solb3
+
+print 'Paramter für a) mit Dämpfung'			
+sola1 = iterate(f, fa, n, 4, a1, t, 1e-6,True)
+sola2 = iterate(f, fa, n, 4, a2, t, 1e-6,True)
+sola3 = iterate(f, fa, n, 4, a3, t, 1e-6,True)
+print sola1
+print sola2
+print sola3
+
+print 'Paramter für b) mit Dämpfung'
+solb1 = iterate(g, ga, n, 3, b1, t, 1e-6,True)
+solb2 = iterate(g, ga, n, 3, b1, t, 1e-6,True)
+solb3 = iterate(g, ga, n, 3, b1, t, 1e-6,True)
+print solb1
+print solb2
+print solb3						
+												
+#Ohne Dämpfung ergeben sich für den Startwert a3) keine sinnvollen Werte. 
 
 
-solb1 = iterate(g, ga, n, 3, b1, t, 1e-8)
-solb2 = iterate(g, ga, n, 3, b1, t, 1e-8)
-solb3 = iterate(g, ga, n, 3, b1, t, 1e-8)
-			
 
-#Plot			
-x = np.arange(1.,5.,0.001)
+#Test-Plot:		
+#x = np.arange(1.,5.,0.001)
 #plt.plot(x,g(sola1,x),dat('data2', " ", 0)[0],dat('data2', " ", 0)[1],'x')
-plt.legend(('Fit','Datensatz'), loc=1)
-plt.xlabel('x')
-plt.ylabel('t')
+#plt.legend(('Fit','Datensatz'), loc=1)
+#plt.xlabel('x')
+#plt.ylabel('t')
 #plt.show()
 
 			
-			
+
+
+#6.4.2												
+#Der Plot wurde als figure_2.png exportiert. Für das letzte Viertel der Messwerte ergab sich
+#ein Overflow in der Exponentialfunktion von f(a,t).
+
 #Plot
 x = np.arange(1.,5.,0.001)
 
@@ -268,18 +308,20 @@ x = np.arange(1.,5.,0.001)
 t = np.split(dat('data2', " ", 0)[0],4)[0]
 y = np.split(dat('data2', " ", 0)[1],4)[0]
 n = len(t)
-sol = iterate(f, fa, n, 4, a1, t, 1e-8)
+sol = iterate(f, fa, n, 4, a1, t, 1e-2)
 x = np.arange(1.,5.,0.001)
 plt.plot(x,g(sol,x))
 
 
-#letztes vierteil
-x = np.split(dat('data2', " ", 0)[0],4)[3]
-y = np.split(dat('data2', " ", 0)[1],4)[3]
-n = len(t)
-sol = iterate(f, fa, n, 4, a1, t, 1e-8)
-x = np.arange(1.,5.,0.001)
-plt.plot(x,g(sol,x))
+#letztes viertel
+#t = np.split(dat('data2', " ", 0)[0],4)[3]
+#y = np.split(dat('data2', " ", 0)[1],4)[3]
+#n = len(t)
+#sol = iterate(f, fa, n, 4, a1, t, 1e-2)
+#x = np.arange(1.,5.,0.001)
+#plt.plot(x,g(sol,x))
+
+
 
 
 
@@ -295,50 +337,37 @@ def teilfunk(f,k):
 	return na
 
 #jeder fünfte
-x = teilfunk(dat('data2', " ", 0)[0],5)
+
+t = teilfunk(dat('data2', " ", 0)[0],5)
 y = teilfunk(dat('data2', " ", 0)[1],5)
 n = len(t)
-
-print x
-
-#sol = iterate(f, fa, n, 4, a1, t, 1e-8)
+sol = iterate(f, fa, n, 4, a1, t, 1e-8)
 x = np.arange(1.,5.,0.001)
 plt.plot(x,g(sol,x))
-plt.show()
+
 
 
 #jeder zwanzigste
-x = teilfunk(dat('data2', " ", 0)[0],20)
+t = teilfunk(dat('data2', " ", 0)[0],20)
 y = teilfunk(dat('data2', " ", 0)[1],20)
-sol = iterate(f, fa, n, 4, a1, t, 1e-8)
 n = len(t)
 sol = iterate(f, fa, n, 4, a1, t, 1e-8)
 x = np.arange(1.,5.,0.001)
 plt.plot(x,g(sol,x))
-
 
 
 #jeder vierzigste
-x = teilfunk(dat('data2', " ", 0)[0],40)
+t = teilfunk(dat('data2', " ", 0)[0],40)
 y = teilfunk(dat('data2', " ", 0)[1],40)		
-sol = iterate(f, fa, n, 4, a1, t, 1e-8)
 n = len(t)
 sol = iterate(f, fa, n, 4, a1, t, 1e-8)
 x = np.arange(1.,5.,0.001)
 plt.plot(x,g(sol,x))
-	
 
-
-
-
-
-
-
-# print np.linalg.norm(delta)
-# if(np.linalg.norm(delta) < stop):
-#     return a
-
-a = iterate(f, fa, n, m, a3, t, 1e-6, True)
-print a
+plt.plot(dat('data2', " ", 0)[0],dat('data2', " ", 0)[1],'x')
+plt.xlabel('x')
+plt.ylabel('t')
+plt.legend(('1. Viertel','5. Wert','20. Wert','40. Wert','Datensatz'), loc=1)
+#plt.show()
 
 
