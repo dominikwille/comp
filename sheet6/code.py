@@ -14,7 +14,7 @@ import os
 
 #6.1
 #Daten einlesen:
-def dat(x, delim = "\t", offset = 3):
+def dat(x, delim = "\t", offset = 0):
     fn = os.path.join(os.path.dirname(__file__), x)
 
     data = np.genfromtxt(fn, delimiter = delim)
