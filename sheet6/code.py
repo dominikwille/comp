@@ -162,16 +162,16 @@ def fa(i, a, t):
     else:
         return 0
 
-def g(a0,a1,a2,t):
-	return np.exp(-a0*t)*a2*np.sin(a1*t)
+def g(a,t):
+	return np.exp(-a[0]*t)*a[2]*np.sin(a[1]*t)
 
 def ga(i, a, t):
     if(i == 0):
-        return -t*np.exp(-a0*t)*a2*np.sin(a1*t)
+        return -t*np.exp(-a[0]*t)*a[2]*np.sin(a[1]*t)
     elif(i == 1):
-        return np.exp(-a0*t)*a2*t*np.cos(a1*t)
+        return np.exp(-a[0]*t)*a[2]*t*np.cos(a[1]*t)
     elif(i == 2):
-        return np.exp(-a0*t)*np.sin(a1*t)
+        return np.exp(-a[0]*t)*np.sin(a[1]*t)
     else:
         return 0	
 	
@@ -191,7 +191,7 @@ t = dat('data2', " ", 0)[0]
 y = dat('data2', " ", 0)[1]
 n = len(t)
 
-m = 4
+
 
 
 
@@ -208,19 +208,113 @@ def iterate(func, funca, n, m, a0, t, stop = 1e-6, damping = False):
     a = a0
     while(True):
         a_old = a
-        g = np.matrix(y - np.vectorize(func, excluded=[0])(a, t))
+        r = np.matrix(y - np.vectorize(func, excluded=[0])(a, t))
         
         D = Jac(funca, n, m, a, t)
-        delta = np.squeeze(np.asarray(np.linalg.solve(D.T*D, D.T*g.T)))
+        delta = np.squeeze(np.asarray(np.linalg.solve(D.T*D, D.T*r.T)))
 
         while(damping):
             break
         a = a + delta
-        print np.linalg.norm(a-a_old)
+        #print np.linalg.norm(a-a_old)
         if(np.linalg.norm(a-a_old) < stop):
             return a
 
 
-a = iterate(f, fa, n, m, a1, t, 1e-8)
-print a
+
+			
+			
+#Lösungsvektoren			
+sola1 = iterate(f, fa, n, 4, a1, t, 1e-8)
+sola2 = iterate(f, fa, n, 4, a2, t, 1e-8)
+sola3 = iterate(f, fa, n, 4, a3, t, 1e-8)
+
+
+solb1 = iterate(g, ga, n, 3, b1, t, 1e-8)
+solb2 = iterate(g, ga, n, 3, b1, t, 1e-8)
+solb3 = iterate(g, ga, n, 3, b1, t, 1e-8)
+			
+
+#Plot			
+x = np.arange(1.,5.,0.001)
+#plt.plot(x,g(sola1,x),dat('data2', " ", 0)[0],dat('data2', " ", 0)[1],'x')
+plt.legend(('Fit','Datensatz'), loc=1)
+plt.xlabel('x')
+plt.ylabel('t')
+#plt.show()
+
+			
+			
+#Plot
+x = np.arange(1.,5.,0.001)
+
+#erstes viertel:
+t = np.split(dat('data2', " ", 0)[0],4)[0]
+y = np.split(dat('data2', " ", 0)[1],4)[0]
+n = len(t)
+sol = iterate(f, fa, n, 4, a1, t, 1e-8)
+x = np.arange(1.,5.,0.001)
+plt.plot(x,g(sol,x))
+
+
+#letztes vierteil
+x = np.split(dat('data2', " ", 0)[0],4)[3]
+y = np.split(dat('data2', " ", 0)[1],4)[3]
+n = len(t)
+sol = iterate(f, fa, n, 4, a1, t, 1e-8)
+x = np.arange(1.,5.,0.001)
+plt.plot(x,g(sol,x))
+
+
+
+#Hilfsfunktion für jeden k-ten Wert der Liste f
+def teilfunk(f,k):
+	na = np.array([])
+	c = 0
+	for i in range(0,len(f)):
+		c+=1
+		if c == k:
+			na = np.append(na,np.array(f[i]))
+			c=0
+	return na
+
+#jeder fünfte
+x = teilfunk(dat('data2', " ", 0)[0],5)
+y = teilfunk(dat('data2', " ", 0)[1],5)
+n = len(t)
+
+print x
+
+#sol = iterate(f, fa, n, 4, a1, t, 1e-8)
+x = np.arange(1.,5.,0.001)
+plt.plot(x,g(sol,x))
+plt.show()
+
+
+#jeder zwanzigste
+x = teilfunk(dat('data2', " ", 0)[0],20)
+y = teilfunk(dat('data2', " ", 0)[1],20)
+sol = iterate(f, fa, n, 4, a1, t, 1e-8)
+n = len(t)
+sol = iterate(f, fa, n, 4, a1, t, 1e-8)
+x = np.arange(1.,5.,0.001)
+plt.plot(x,g(sol,x))
+
+
+
+#jeder vierzigste
+x = teilfunk(dat('data2', " ", 0)[0],40)
+y = teilfunk(dat('data2', " ", 0)[1],40)		
+sol = iterate(f, fa, n, 4, a1, t, 1e-8)
+n = len(t)
+sol = iterate(f, fa, n, 4, a1, t, 1e-8)
+x = np.arange(1.,5.,0.001)
+plt.plot(x,g(sol,x))
+	
+
+
+
+
+
+
 
