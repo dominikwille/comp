@@ -196,11 +196,24 @@ n = len(t)
 
 
 
-def Jac(funca, n, m, a, t):
+def jac(funca, n, m, a, t):
     D = np.empty([n, m])
     for i in range(m):
         D[:,i] = np.vectorize(funca, excluded=[0, 1])(i, a, t)
     return np.matrix(D)
+
+def error(func, a, t, y):
+    return np.linalg.norm(np.vectorize(func, excluded=[0])(a, t) - y)
+
+def damp(func, a0, t, y, delta):
+    damp = 1.
+    err = error(func, a0, t, y)
+    while(damp > 1e-6):
+        a = a0 + damp * delta
+        if(err > error(func, a, t, y)):
+            break
+        damp /= 2
+    return damp
 
 
 #iterate
@@ -210,12 +223,15 @@ def iterate(func, funca, n, m, a0, t, stop = 1e-6, damping = False):
         a_old = a
         r = np.matrix(y - np.vectorize(func, excluded=[0])(a, t))
         
-        D = Jac(funca, n, m, a, t)
-        delta = np.squeeze(np.asarray(np.linalg.solve(D.T*D, D.T*r.T)))
 
-        while(damping):
-            break
+        D = jac(funca, n, m, a, t)
+        delta = np.squeeze(np.asarray(np.linalg.solve(D.T*D, D.T*g.T)))
+
+
+        if(damping):
+            delta *= damp(func, a, t, y, delta)
         a = a + delta
+
         #print np.linalg.norm(a-a_old)
         if(np.linalg.norm(a-a_old) < stop):
             return a
@@ -316,5 +332,13 @@ plt.plot(x,g(sol,x))
 
 
 
+
+
+        print np.linalg.norm(delta)
+        if(np.linalg.norm(delta) < stop):
+            return a
+
+a = iterate(f, fa, n, m, a3, t, 1e-6, True)
+print a
 
 
