@@ -209,19 +209,22 @@ def gauss(n, func, a, b):
 lis =[]
 correct = np.pi / 3.0 / np.sqrt(3)
 a = 0
-b = np.pi
+b = np.pi / 2
+for i in range(7):
+        l = i + 1
+        lis.append((np.abs(correct - romberg(f, a, b, l, l)), 'h-Extrapolation mit i, j = ' + str(l)))
+       
 for i in range(20):
         l = i + 1
         N = 2 * l
         lis.append((np.abs(correct - int(f, a, b, N, ITI)),'Trapezregel mit N = ' + str(N)))
         lis.append((np.abs(correct - int(f, a, b, N, ISI)),'Simpsonregel mit N = ' + str(N)))
-        lis.append((np.abs(correct - romberg(f, a, b, l, l)), 'h-Extrapolation mit i, j = ' + str(l)))
         lis.append((np.abs(correct - gauss(N, f, a, b)), 'Gauss-Quadratur mit N = ' + str(N)))
         
-
+l =  sorted(lis, key=lambda tupel: tupel[0])
 A = []
 legend = []
-for i in lis:
+for i in l:
 	A.append(i[0])
 	legend.append(i[1])
 
