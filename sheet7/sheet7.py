@@ -1,4 +1,4 @@
-﻿#!/usr/local/bin/python
+#!/usr/local/bin/python
 # -*- coding: utf-8 -*-
 #
 # @author Dominik Wille
@@ -161,10 +161,8 @@ def romberg(func,a,b,i,k):
 l = []
 for i in range(0,5):
 	for j in range(0,5):
-		if i == j:
-			l.append(abs(np.pi/(3.*np.sqrt(3.))-(romberg(f,0,np.pi/2,i,j))),'$L_{'+ str(i) +','+ str(j) +'}$')
-		if j == 1 and i !=1:
-			l.append(abs(np.pi/(3.*np.sqrt(3.))-(romberg(f,0,np.pi/2,i,j))),'$L_{'+ str(i) +','+ str(j) +'}$')
+		if((i == j) or (j == 1 and i !=1)):
+			l.append((np.abs(np.pi/(3.*np.sqrt(3.))-(romberg(f,0,np.pi/2,i,j))),'$L_{'+ str(i) +','+ str(j) +'}$'))
 			
 			
 #Der Plot wurde als vgl3.png exportiert.			
