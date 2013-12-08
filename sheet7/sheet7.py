@@ -9,6 +9,7 @@
 #Packete einlesen:
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy import special #.orthogonal.p_roots
 
 #7.1.2
 #Definition en der ABleitungsfunktionen und der analytischen Lösung Dana.
@@ -190,5 +191,19 @@ plt.tight_layout()
 
 x = np.arange(0,100,0.1)
 plt.plot(x,)
-plt.show()
- 
+#plt.show()
+
+#7.2.4 
+# print special.orthogonal.p_roots(10)
+
+def gauss(n, func, a, b):
+        roots = special.orthogonal.p_roots(n)
+        print roots
+        value = 0.0
+        for i in range(0,n):
+                x = roots[0][i] * (b - a) / 2.0 + (b + a) / 2.0
+                a = roots[1][i]
+                value += func(x) * a
+        return value * (b - a) / 2.0
+
+print gauss(200, f, 0, np.pi)
