@@ -84,3 +84,25 @@ plt.xticks(ind+width/2., ('Hallo', '2', '3', '4', '5', '6', '7', '8', '9', '10')
 
 
 plt.show()
+
+
+
+
+
+
+
+
+#7.2.2
+#Definition der Verfahren:
+#Rechteckverfahren:
+def IRI(func,a,b):
+	return func((a+b)/2)*(b-a)
+#Trapezregel:
+def ITI(func,a,b):
+	return (b-a)*(func(a)+func(b))/2
+#Simpsonregel:
+def ISI(func,a,b):
+	return (b-a)/6*(func(a)+4*func((a+b)/2)+func(b))
+	
+#def int(m, n, x):
+	
