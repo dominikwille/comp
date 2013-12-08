@@ -193,11 +193,6 @@ for i in range(20,200,20):
 #plt.xticks(ind+width/2., legend, rotation=90)
 #plt.tight_layout()
 
-plt.ylabel('Fehler')
-plt.title('Fehler verschiederner Integrationsverfahren')
-plt.xticks(ind+width/2., legend, rotation=90)
-plt.tight_layout()
-
 #plt.show()
 
 #7.2.4 
