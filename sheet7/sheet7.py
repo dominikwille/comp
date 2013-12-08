@@ -51,36 +51,53 @@ h = 1.0
 #         plt.plot(x, h_extrapolation(f, D, h, 0, i, x)) 
 # plt.show()
 
-def error(func1, func2, values):
+# Frage an den Tutor: is es möglich funktionen als parameter zu übergeben, und dabei einige
+# parameter schon zu setzten. Ich habe jetzt fast 1h damit verschwendet zu googlen und bin
+# noch zu keinem Schluss gekommen. Daher jetzt hier etwas eklig:
+def error_h(func1, func2, values, func, h):
         err = 0.0
         for i in values:
-                err += abs(func1(i) - func2(i))
+                err += np.abs(func1(i) - func2(func, i, h))
+        return err
+
+def error_hk(func1, func2, values, func, h, k):
+        err = 0.0
+        for i in values:
+                err += abs(func1(i) - func2(func, D, h, 0, k, i))
         return err
 
 #1. verfahren
 l = []
 for i in range(0,6):
-        print error(Dana, D(func=f, h=h(i)), x)
+        l.append((error_h(Dana, D, x, f, 2.0**(-i)), 'Differenzenquotient h = $2^{-' + str(i) + '}$'))
 
-print l
+#2. verfahren
+for i in range(0,6):
+        l.append((error_h(Dana, D2, x, f, 2.0**(-i)), 'Taylor h = $2^{-' + str(i) + '}$'))
 
+#3. Verfahren
+for i in range(0,6):
+        l.append((error_hk(Dana, h_extrapolation, x, f, 1.0, i), 'h-Extrapolation h = 1; n = ' + str(i)))
 
-A = np.array([70, 88, 78, 93, 99, 58, 89, 66, 77, 78])
+l =  sorted(l, key=lambda tupel: tupel[0])
+
+A = []
+legend = []
+for i in l:
+        A.append(i[0])
+        legend.append(i[1])
+
+A = np.array(A)
 N = len(A)
 
-ind = np.arange(N)    # the x locations for the groups
-width = 0.35       # the width of the bars: can also be len(x) sequence
+ind = np.arange(N)   
+width = 0.35 
 
 p1 = plt.bar(ind, A,width, color='r')
 
 plt.ylabel('Fehler')
-plt.title('Fehler verschiederner Verfahren')
+plt.title('Fehler verschiederner Differentiationsverfahren')
 
-plt.xticks(ind+width/2., ('Hallo', '2', '3', '4', '5', '6', '7', '8', '9', '10'))#dynamic - fed
-
-# plt.yticks(np.arange(0,300,10))
-# plt.legend( (p1[0], p2[0], p3[0]), ('A','B','C') )
-# plt.grid(True)
-
-
+plt.xticks(ind+width/2., legend, rotation=90)
+plt.tight_layout()
 plt.show()
