@@ -148,3 +148,49 @@ print 'pi'
 print int(f,0,np.pi,20,IRI)
 print int(f,0,np.pi,20,ITI)
 print int(f,0,np.pi,20,ISI)
+
+
+
+#7.2.3
+def romberg(func,a,b,i,k):
+        if(k == 0):
+                return int(func,a,b,4*2**i,ITI) 
+        else:
+                return romberg(func,a,b,i,k-1)+(romberg(func,a,b,i,k-1)-romberg(func,a,b,i-1,k-1))/(4**k-1)
+				
+l = []
+for i in range(0,5):
+	for j in range(0,5):
+		if i == j:
+			l.append(abs(np.pi/(3.*np.sqrt(3.))-(romberg(f,0,np.pi/2,i,j))),'$L_{'+ str(i) +','+ str(j) +'}$')
+		if j == 1 and i !=1:
+			l.append(abs(np.pi/(3.*np.sqrt(3.))-(romberg(f,0,np.pi/2,i,j))),'$L_{'+ str(i) +','+ str(j) +'}$')
+			
+			
+#Der Plot wurde als vgl3.png exportiert.			
+l =  sorted(l, key=lambda tupel: tupel[0])
+
+A = []
+legend = []
+for i in l:
+	A.append(i[0])
+	legend.append(i[1])
+
+A = np.array(A)
+N = len(A)
+
+ind = np.arange(N)   
+width = 0.35 
+
+p = plt.bar(ind, A,width, color='r')
+plt.yscale('log')
+
+plt.ylabel('Fehler')
+plt.title('Fehler verschiederner Integrationsverfahren')
+plt.xticks(ind+width/2., legend, rotation=90)
+plt.tight_layout()
+
+x = np.arange(0,100,0.1)
+plt.plot(x,)
+plt.show()
+ 
