@@ -40,9 +40,9 @@ def h(i):
 #7.1.4
 def h_extrapolation(func, D_func, h, i, k, x):
         if(k == 0):
-                return D_func(func, x, h/(2**i))
+                return D_func(func, x, h/(2.0**i))
         else:
-                return h_extrapolation(func, D_func, h, i + 1, k - 1, x) + (h_extrapolation(func, D_func, h, i + 1, k - 1, x) - h_extrapolation(func, D_func, h, i, k - 1, x)) / (2**k - 1)
+                return h_extrapolation(func, D_func, h, i + 1, k - 1, x) + (h_extrapolation(func, D_func, h, i + 1, k - 1, x) - h_extrapolation(func, D_func, h, i, k - 1, x)) / (2.0**k - 1)
 
 h = 1.0
 
@@ -66,41 +66,43 @@ def error_hk(func1, func2, values, func, h, k):
                 err += abs(func1(i) - func2(func, D, h, 0, k, i))
         return err
 
-#1. verfahren
-l = []
-for i in range(0,6):
-        l.append((error_h(Dana, D, x, f, 2.0**(-i)), 'Differenzenquotient h = $2^{-' + str(i) + '}$'))
+# #1. verfahren
+# l = []
+# for i in range(0,11):
+#         l.append((error_h(Dana, D, x, f, 2.0**(-i)), 'Differenzenquotient h = $2^{-' + str(i) + '}$'))
 
-#2. verfahren
-for i in range(0,6):
-        l.append((error_h(Dana, D2, x, f, 2.0**(-i)), 'Taylor h = $2^{-' + str(i) + '}$'))
+# #2. verfahren
+# for i in range(0,11):
+#         l.append((error_h(Dana, D2, x, f, 2.0**(-i)), 'Taylor h = $2^{-' + str(i) + '}$'))
 
-#3. Verfahren
-for i in range(0,6):
-        l.append((error_hk(Dana, h_extrapolation, x, f, 1.0, i), 'h-Extrapolation h = 1; n = ' + str(i)))
+# #3. Verfahren
+# for i in range(0,11):
+#         for n in range(0,7):
+#                 l.append((error_hk(Dana, h_extrapolation, x, f, 2**(-i), n), 'h-Extrapolation h = $2^{-' + str(i) + '}$; n = ' + str(n)))
 
-l =  sorted(l, key=lambda tupel: tupel[0])
+# l =  sorted(l, key=lambda tupel: tupel[0])
 
-A = []
-legend = []
-for i in l:
-        A.append(i[0])
-        legend.append(i[1])
+# A = []
+# legend = []
+# for i in l:
+#         A.append(i[0])
+#         legend.append(i[1])
 
-A = np.array(A)
-N = len(A)
+# A = np.array(A)
+# N = len(A)
 
-ind = np.arange(N)   
-width = 0.35 
+# ind = np.arange(N)   
+# width = 0.35 
 
-p1 = plt.bar(ind, A,width, color='r')
+# p = plt.bar(ind, A,width, color='r')
+# plt.yscale('log')
 
-plt.ylabel('Fehler')
-plt.title('Fehler verschiederner Differentiationsverfahren')
+# plt.ylabel('Fehler')
+# plt.title('Fehler verschiederner Differentiationsverfahren')
+# plt.xticks(ind+width/2., legend, rotation=90)
+# plt.tight_layout()
+# plt.show()
 
-plt.xticks(ind+width/2., legend, rotation=90)
-plt.tight_layout()
-#plt.show()
 
 
 
