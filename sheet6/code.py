@@ -1,4 +1,4 @@
-﻿#!/usr/local/bin/python
+#!/usr/local/bin/python
 # -*- coding: utf-8 -*-
 #
 # @author Dominik Wille
@@ -55,8 +55,8 @@ def f2(x, f):
         return 0
 
 #Belegung der Daten
-x = dat('data')[0]
-y = dat('data')[1]
+x = dat('data.txt')[0]
+y = dat('data.txt')[1]
 n = len(x)
  
  
@@ -99,8 +99,8 @@ def F2(x):
 	return y
 
 	
-x = dat('data')[0]
-y = dat('data')[1]	
+x = dat('data.txt')[0]
+y = dat('data.txt')[1]	
 sum = 0
 
 
@@ -142,7 +142,7 @@ print x[index]
 
 #Plot, wurde als figure_1.png exportiert.
 #x = np.arange(1970.,2030.,1.)
-#plt.plot(dat('data')[0], dat('data')[1], 'bs', x, np.vectorize(F1)(x), x, np.vectorize(F2)(x))
+#plt.plot(dat('data.txt')[0], dat('data.txt')[1], 'bs', x, np.vectorize(F1)(x), x, np.vectorize(F2)(x))
 #plt.legend(('Daten', '$(i)$', '$(ii)$'), loc=1)
 #plt.xlabel('Jahr')
 #plt.ylabel('Doenerpreis in Euro')
@@ -197,8 +197,8 @@ b3 = np.array([1.0, 7.0,-6.0])
 
 
 
-t = dat('data2', " ", 0)[0]
-y = dat('data2', " ", 0)[1]
+t = dat('data2.txt', " ", 0)[0]
+y = dat('data2.txt', " ", 0)[1]
 n = len(t)
 
 
@@ -235,8 +235,6 @@ def iterate(func, funca, n, m, a0, t, stop = 1e-6, damping = False):
 
         D = jac(funca, n, m, a, t)
         delta = np.squeeze(np.asarray(np.linalg.solve(D.T*D, D.T*g.T)))
-
-
         if(damping):
             delta *= damp(func, a, t, y, delta)
         a = a + delta
@@ -288,7 +286,7 @@ print solb3
 
 #Test-Plot:		
 #x = np.arange(1.,5.,0.001)
-#plt.plot(x,g(sola1,x),dat('data2', " ", 0)[0],dat('data2', " ", 0)[1],'x')
+#plt.plot(x,g(sola1,x),dat('data2.txt', " ", 0)[0],dat('data2.txt', " ", 0)[1],'x')
 #plt.legend(('Fit','Datensatz'), loc=1)
 #plt.xlabel('x')
 #plt.ylabel('t')
@@ -305,8 +303,8 @@ print solb3
 x = np.arange(1.,5.,0.001)
 
 #erstes viertel:
-t = np.split(dat('data2', " ", 0)[0],4)[0]
-y = np.split(dat('data2', " ", 0)[1],4)[0]
+t = np.split(dat('data2.txt', " ", 0)[0],4)[0]
+y = np.split(dat('data2.txt', " ", 0)[1],4)[0]
 n = len(t)
 sol = iterate(f, fa, n, 4, a1, t, 1e-2)
 x = np.arange(1.,5.,0.001)
@@ -314,8 +312,8 @@ plt.plot(x,g(sol,x))
 
 
 #letztes viertel
-#t = np.split(dat('data2', " ", 0)[0],4)[3]
-#y = np.split(dat('data2', " ", 0)[1],4)[3]
+#t = np.split(dat('data2.txt', " ", 0)[0],4)[3]
+#y = np.split(dat('data2.txt', " ", 0)[1],4)[3]
 #n = len(t)
 #sol = iterate(f, fa, n, 4, a1, t, 1e-2)
 #x = np.arange(1.,5.,0.001)
@@ -338,8 +336,8 @@ def teilfunk(f,k):
 
 #jeder fünfte
 
-t = teilfunk(dat('data2', " ", 0)[0],5)
-y = teilfunk(dat('data2', " ", 0)[1],5)
+t = teilfunk(dat('data2.txt', " ", 0)[0],5)
+y = teilfunk(dat('data2.txt', " ", 0)[1],5)
 n = len(t)
 sol = iterate(f, fa, n, 4, a1, t, 1e-8)
 x = np.arange(1.,5.,0.001)
@@ -348,8 +346,8 @@ plt.plot(x,g(sol,x))
 
 
 #jeder zwanzigste
-t = teilfunk(dat('data2', " ", 0)[0],20)
-y = teilfunk(dat('data2', " ", 0)[1],20)
+t = teilfunk(dat('data2.txt', " ", 0)[0],20)
+y = teilfunk(dat('data2.txt', " ", 0)[1],20)
 n = len(t)
 sol = iterate(f, fa, n, 4, a1, t, 1e-8)
 x = np.arange(1.,5.,0.001)
@@ -357,17 +355,17 @@ plt.plot(x,g(sol,x))
 
 
 #jeder vierzigste
-t = teilfunk(dat('data2', " ", 0)[0],40)
-y = teilfunk(dat('data2', " ", 0)[1],40)		
+t = teilfunk(dat('data2.txt', " ", 0)[0],40)
+y = teilfunk(dat('data2.txt', " ", 0)[1],40)		
 n = len(t)
 sol = iterate(f, fa, n, 4, a1, t, 1e-8)
 x = np.arange(1.,5.,0.001)
 plt.plot(x,g(sol,x))
 
-plt.plot(dat('data2', " ", 0)[0],dat('data2', " ", 0)[1],'x')
+plt.plot(dat('data2.txt', " ", 0)[0],dat('data2.txt', " ", 0)[1],'x')
 plt.xlabel('x')
 plt.ylabel('t')
 plt.legend(('1. Viertel','5. Wert','20. Wert','40. Wert','Datensatz'), loc=1)
-#plt.show()
+plt.show()
 
 

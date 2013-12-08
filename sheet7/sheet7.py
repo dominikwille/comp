@@ -7,3 +7,9 @@
 # @sheet 6
 #
 #Packete einlesen:
+
+
+#7.1.2
+def D(func,x,h):
+	return (func(x+h)-func(x-h))/(2*h)
+
