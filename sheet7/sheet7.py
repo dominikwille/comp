@@ -106,12 +106,6 @@ def error_hk(func1, func2, values, func, h, k):
 
 
 
-
-
-
-
-
-
 #7.2.2
 #Definition  der Funktion:
 def f(x):
@@ -209,6 +203,40 @@ def gauss(n, func, a, b):
                 value += func(x) * a
         return value * (b - a) / 2.0
 
-print gauss(20, f, 0, np.pi)
-print gauss(20, f, 0, np.pi/2)
+# print gauss(20, f, 0, np.pi)
+# print gauss(20, f, 0, np.pi/2)
 
+lis =[]
+correct = np.pi / 3.0 / np.sqrt(3)
+a = 0
+b = np.pi
+for i in range(20):
+        l = i + 1
+        N = 2 * l
+        lis.append((np.abs(correct - int(f, a, b, N, ITI)),'Trapezregel mit N = ' + str(N)))
+        lis.append((np.abs(correct - int(f, a, b, N, ISI)),'Simpsonregel mit N = ' + str(N)))
+        lis.append((np.abs(correct - romberg(f, a, b, l, l)), 'h-Extrapolation mit i, j = ' + str(l)))
+        lis.append((np.abs(correct - gauss(N, f, a, b)), 'Gauss-Quadratur mit N = ' + str(N)))
+        
+
+A = []
+legend = []
+for i in lis:
+	A.append(i[0])
+	legend.append(i[1])
+
+A = np.array(A)
+N = len(A)
+
+ind = np.arange(N)   
+width = 0.35 
+
+p = plt.bar(ind, A,width, color='r')
+plt.yscale('log')
+
+plt.ylabel('Fehler')
+plt.title('Fehler verschiederner Integrationsverfahren')
+plt.xticks(ind+width/2., legend, rotation=90)
+plt.tight_layout()
+
+plt.show()
