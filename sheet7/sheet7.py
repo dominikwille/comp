@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+﻿#!/usr/local/bin/python
 # -*- coding: utf-8 -*-
 #
 # @author Dominik Wille
@@ -100,7 +100,7 @@ plt.title('Fehler verschiederner Differentiationsverfahren')
 
 plt.xticks(ind+width/2., legend, rotation=90)
 plt.tight_layout()
-plt.show()
+#plt.show()
 
 
 
@@ -110,6 +110,10 @@ plt.show()
 
 
 #7.2.2
+#Definition  der Funktion:
+def f(x):
+	return 1/(2+np.cos(x))
+
 #Definition der Verfahren:
 #Rechteckverfahren:
 def IRI(func,a,b):
@@ -121,5 +125,24 @@ def ITI(func,a,b):
 def ISI(func,a,b):
 	return (b-a)/6*(func(a)+4*func((a+b)/2)+func(b))
 	
-#def int(m, n, x):
+#Integrationsfunktion
+def int(func,a,b,n,m):
+	i = 0
+	sum = 0
+	area = 0
+	while sum <= abs(b-a):
+		sum += (abs(b-a)/n)
+		area += m(func,sum-(abs(b-a)/n),sum)
+	return area
+
 	
+#Auswertung:
+print 'pi-halbe'
+print int(f,0,np.pi/2,20,IRI)
+print int(f,0,np.pi/2,20,ITI)
+print int(f,0,np.pi/2,20,ISI)
+
+print 'pi'
+print int(f,0,np.pi,20,IRI)
+print int(f,0,np.pi,20,ITI)
+print int(f,0,np.pi,20,ISI)
