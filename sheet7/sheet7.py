@@ -164,31 +164,33 @@ for i in range(0,5):
 		if((i == j) or (j == 1 and i !=1)):
 			l.append((np.abs(np.pi/(3.*np.sqrt(3.))-(romberg(f,0,np.pi/2,i,j))),'$L_{'+ str(i) +','+ str(j) +'}$'))
 			
+
+for i in range(20,200,20):
+	l.append((np.abs(np.pi/(3.*np.sqrt(3.))-(int(f,0,np.pi/2,i,ISI))),'Smps mit '+ str(i) +'       Intervallen'))
+	
+
 			
 #Der Plot wurde als vgl3.png exportiert.			
-l =  sorted(l, key=lambda tupel: tupel[0])
+#l =  sorted(l, key=lambda tupel: tupel[0])
+#A = []
+#legend = []
+#for i in l:
+#	A.append(i[0])
+#	legend.append(i[1])
 
-A = []
-legend = []
-for i in l:
-	A.append(i[0])
-	legend.append(i[1])
+#A = np.array(A)
+#N = len(A)
 
-A = np.array(A)
-N = len(A)
+#ind = np.arange(N)   
+#width = 0.35 
 
-ind = np.arange(N)   
-width = 0.35 
+#p = plt.bar(ind, A,width, color='r')
+#plt.yscale('log')
 
-p = plt.bar(ind, A,width, color='r')
-plt.yscale('log')
+#plt.ylabel('Fehler')
+#plt.title('Fehler verschiederner Integrationsverfahren')
+#plt.xticks(ind+width/2., legend, rotation=90)
+#plt.tight_layout()
 
-plt.ylabel('Fehler')
-plt.title('Fehler verschiederner Integrationsverfahren')
-plt.xticks(ind+width/2., legend, rotation=90)
-plt.tight_layout()
-
-x = np.arange(0,100,0.1)
-plt.plot(x,)
-plt.show()
+#plt.show()
  
