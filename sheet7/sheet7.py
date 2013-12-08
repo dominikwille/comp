@@ -4,7 +4,7 @@
 # @author Dominik Wille
 # @author Stefan Pojtinger
 # @tutor Alexander Schlaich
-# @sheet 6
+# @sheet 7
 #
 #Packete einlesen:
 import numpy as np
