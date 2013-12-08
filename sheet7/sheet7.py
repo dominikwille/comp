@@ -141,11 +141,13 @@ def int(func,a,b,n,m):
 	
 #Auswertung:
 print 'pi-halbe'
+print np.pi / 3.0 / np.sqrt(3)
 print int(f,0,np.pi/2,20,IRI)
 print int(f,0,np.pi/2,20,ITI)
 print int(f,0,np.pi/2,20,ISI)
 
 print 'pi'
+print  np.pi / np.sqrt(3)
 print int(f,0,np.pi,20,IRI)
 print int(f,0,np.pi,20,ITI)
 print int(f,0,np.pi,20,ISI)
@@ -200,7 +202,6 @@ for i in range(20,200,20):
 
 def gauss(n, func, a, b):
         roots = special.orthogonal.p_roots(n)
-        print roots
         value = 0.0
         for i in range(0,n):
                 x = roots[0][i] * (b - a) / 2.0 + (b + a) / 2.0
@@ -208,4 +209,6 @@ def gauss(n, func, a, b):
                 value += func(x) * a
         return value * (b - a) / 2.0
 
-print gauss(200, f, 0, np.pi)
+print gauss(20, f, 0, np.pi)
+print gauss(20, f, 0, np.pi/2)
+
