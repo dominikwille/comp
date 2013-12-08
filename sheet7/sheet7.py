@@ -207,9 +207,9 @@ def gauss(n, func, a, b):
 # print gauss(20, f, 0, np.pi/2)
 
 lis =[]
-correct = np.pi / 3.0 / np.sqrt(3)
+correct = np.pi / np.sqrt(3)
 a = 0
-b = np.pi / 2
+b = np.pi
 for i in range(7):
         l = i + 1
         lis.append((np.abs(correct - romberg(f, a, b, l, l)), 'h-Extrapolation mit i, j = ' + str(l)))
