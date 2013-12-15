@@ -1,8 +1,16 @@
-﻿# -*- coding: utf-8-sig -*-
+﻿#!/usr/local/bin/python
+# -*- coding: utf-8 -*-
+#
+# @author Dominik Wille
+# @author Stefan Pojtinger
+# @tutor Alexander Schlaich
+# @sheet 8
+#
+#Packete einlesen:
 import numpy as np
 import sys
 import matplotlib.pyplot as plt
-sys.setrecursionlimit(10000000)
+sys.setrecursionlimit(9000)
 
 
 #8.1 a)
@@ -106,29 +114,29 @@ print abs(runge(f, 0.001, 0., 2., 0.,1., [], [])[1][1000]-np.exp(-1))
 
 
 #plot: wurde als figure_2.png exportiert.
-def ploteuler(x):
-	return euler(f, x, 0., 2., 0.,1., [], [])[1][10]
+#def ploteuler(x):
+#	return euler(f, x, 0., 2., 0.,1., [], [])[1][10]
 
-def plotmittelp(x):
-	return mittelp(f, x, 0., 2., 0.,1., [], [])[1][10]
+#def plotmittelp(x):
+#	return mittelp(f, x, 0., 2., 0.,1., [], [])[1][10]
 
-def plotrunge(x):
-	return runge(f, x, 0., 2., 0.,1., [], [])[1][10]
+#def plotrunge(x):
+#	return runge(f, x, 0., 2., 0.,1., [], [])[1][10]
 
-pe = np.vectorize(ploteuler)
-pm = np.vectorize(plotmittelp)
-pr = np.vectorize(plotrunge)
+#pe = np.vectorize(ploteuler)
+#pm = np.vectorize(plotmittelp)
+#pr = np.vectorize(plotrunge)
 
-h = np.arange(0.001,0.1,0.0001)
+#h = np.arange(0.001,0.1,0.0001)
 
-plt.loglog(h, pe(h), h, pm(h), h, pr(h))
+#plt.loglog(h, pe(h), h, pm(h), h, pr(h))
 
-plt.legend( ('Euler', 'Mittelp', 'Runge'), loc=3)
+#plt.legend( ('Euler', 'Mittelp', 'Runge'), loc=3)
 
-plt.xlabel('log(h)')
-plt.ylabel('log($\Delta$y)')
+#plt.xlabel('log(h)')
+#plt.ylabel('log($\Delta$y)')
 
-plt.show()
+#plt.show()
  
 
  
