@@ -106,24 +106,45 @@ print abs(runge(f, 0.001, 0., 2., 0.,1., [], [])[1][1000]-np.exp(-1))
 
 
 #plot: wurde als figure_2.png exportiert.
-#def ploteuler(x):
-#	return euler(f, x, 0., 2., 0.,1., [], [])[1][10]
+def ploteuler(x):
+	return euler(f, x, 0., 2., 0.,1., [], [])[1][10]
 
-#def plotmittelp(x):
-#	return mittelp(f, x, 0., 2., 0.,1., [], [])[1][10]
+def plotmittelp(x):
+	return mittelp(f, x, 0., 2., 0.,1., [], [])[1][10]
 
-#def plotrunge(x):
-#	return runge(f, x, 0., 2., 0.,1., [], [])[1][10]
+def plotrunge(x):
+	return runge(f, x, 0., 2., 0.,1., [], [])[1][10]
 
-#pe = np.vectorize(ploteuler)
-#pm = np.vectorize(plotmittelp)
-#pr = np.vectorize(plotrunge)
+pe = np.vectorize(ploteuler)
+pm = np.vectorize(plotmittelp)
+pr = np.vectorize(plotrunge)
 
-#h = np.arange(0.001,0.1,0.0001)
+h = np.arange(0.001,0.1,0.0001)
 
-#plt.loglog(h, pe(h), h, pm(h), h, pr(h))
+plt.loglog(h, pe(h), h, pm(h), h, pr(h))
 
-#plt.legend( ('Euler', 'Mittelp', 'Runge'), loc=3)
-#plt.show()
+plt.legend( ('Euler', 'Mittelp', 'Runge'), loc=3)
+
+plt.xlabel('log(h)')
+plt.ylabel('log($\Delta$y)')
+
+plt.show()
  
 
+ 
+ 
+ #8.2)
+ #plot: wurde als figure_3.png exportiert.
+ 
+#def g(t,y):
+#	return a*y**2*(1-y)-0.01*y
+	
+#for a in range (1,11):
+#	plt.plot(runge(g, 0.01, 0., 5., 0.,1., [], [])[0], runge(g, 0.01, 0., 5., 0.,1., [], [])[1])
+
+#plt.xlabel('t')
+#plt.ylabel('y')	
+
+#plt.legend( ('a=1', 'a=2', 'a=3', 'a=4', 'a=5', 'a=6', 'a=7', 'a=8', 'a=9', 'a=10', ), loc=3)
+
+#plt.show()
