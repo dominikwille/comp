@@ -1,4 +1,4 @@
-﻿#!/usr/local/bin/python
+#!/usr/local/bin/python
 # -*- coding: utf-8 -*-
 #
 # @author Dominik Wille
@@ -11,13 +11,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import special #.orthogonal.p_roots
 
-#7.1.1
-#Aus Gleichung (2) und (3) ergibt sich:
-# f(x_0+h) + f(x_0-h) = 2 f(x_0)+h**2*f''(x_0)
-# <=> f''(x_0)=(f(x_0+h) + f(x_0-h)-2 f(x_0))/(h**2)
-
 #7.1.2
-#Definition der Ableitungsfunktionen und der analytischen Lösung Dana.
+#Definition en der ABleitungsfunktionen und der analytischen Lösung Dana.
 def D(func,x,h):
 	return (func(x+h)-func(x))/h
 
@@ -197,8 +192,6 @@ for i in range(20,200,20):
 #plt.show()
 
 #7.2.4 
-#Die Plots wurden als 7_2_5_PI und 7_2_5_PI_half exportiert.
-
 # print special.orthogonal.p_roots(10)
 
 def gauss(n, func, a, b):
@@ -217,36 +210,33 @@ lis =[]
 correct = np.pi / np.sqrt(3)
 a = 0
 b = np.pi
-for i in range(7):
-        l = i + 1
-        lis.append((np.abs(correct - romberg(f, a, b, l, l)), 'h-Extrapolation mit i, j = ' + str(l)))
-       
-for i in range(20):
+for i in range(20):	
         l = i + 1
         N = 2 * l
         lis.append((np.abs(correct - int(f, a, b, N, ITI)),'Trapezregel mit N = ' + str(N)))
         lis.append((np.abs(correct - int(f, a, b, N, ISI)),'Simpsonregel mit N = ' + str(N)))
+        lis.append((np.abs(correct - romberg(f, a, b, l, l)), 'h-Extrapolation mit i, j = ' + str(l)))
         lis.append((np.abs(correct - gauss(N, f, a, b)), 'Gauss-Quadratur mit N = ' + str(N)))
         
-#l =  sorted(lis, key=lambda tupel: tupel[0])
-#A = []
-#legend = []
-#for i in l:
-#	A.append(i[0])
-#	legend.append(i[1])
 
-#A = np.array(A)
-#N = len(A)
+A = []
+legend = []
+for i in lis:
+	A.append(i[0])
+	legend.append(i[1])
 
-#ind = np.arange(N)   
-#width = 0.35 
+A = np.array(A)
+N = len(A)
 
-#p = plt.bar(ind, A,width, color='r')
-#plt.yscale('log')
+ind = np.arange(N)   
+width = 0.35 
 
-#plt.ylabel('Fehler')
-#plt.title('Fehler verschiederner Integrationsverfahren')
-#plt.xticks(ind+width/2., legend, rotation=90)
-#plt.tight_layout()
+p = plt.bar(ind, A,width, color='r')
+plt.yscale('log')
 
-#plt.show()
+plt.ylabel('Fehler')
+plt.title('Fehler verschiederner Integrationsverfahren')
+plt.xticks(ind+width/2., legend, rotation=90)
+plt.tight_layout()
+
+plt.show()
