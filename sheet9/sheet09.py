@@ -82,29 +82,56 @@ h = 0.0001
 
 #Um den Fallscirmspringer zu treffen muss ein  Winkel von alpha=49.55° gewählt werden. Der Fallschirmspriger wird in einer Höhe von 46.54m getroffen.
 
-def V(x):
+def V1(x):
     return 2.5e-4 * x**8
+
+def V2(x):
+    return 10e-4*x**8
 
 def F1(x, Phi, phi, V, (E, m, h_bar)):
     return phi
 
 def F2(x, Phi, phi, V, (E, m, h_bar)):
-    return 2 * m / h_bar * (V(x) - E) * Phi
+    return 2 * m * (V(x) - E) * Phi / h_bar
 
-E = 420
-h_bar = 1
-m = 1
-h = 0.001
+# E_min = 0
+# E_max = 100
+# while(E_max - E_min > 0.01):
+P1 = []
+P2 = []
+for E in range(100):
+    # E = (E_max - E_min) / 2.
+    h_bar = 1
+    m = 1
+    h = 0.01
+    x = -7.0
+    Phi = 10e-10
+    phi = 10e-10
+    p_x = []
+    p_y = []
+
+    while(x <= 7):
+        p_x.append(x)
+        p_y.append(phi)
+        (x, Phi, phi) = next(F1, F2, Phi, phi, x, h, (E, m, h_bar), V1)
+    
+    P1.append(E)
+    P2.append(Phi)
+
 x = -6.0
 Phi = 10e-10
 phi = 10e-10
 p_x = []
 p_y = []
-
+E = 2.73
+# E = 400
 while(x <= 6):
     p_x.append(x)
-    p_y.append(Phi)
-    (x, Phi, phi) = next(F1, F2, Phi, phi, x, h, (E, m, h_bar), V)
+    p_y.append(phi)
+    (x, Phi, phi) = next(F1, F2, Phi, phi, x, h, (E, m, h_bar), V1)
 
+
+# plt.plot(P1, P2)
 plt.plot(p_x, p_y)
 plt.show()
+
