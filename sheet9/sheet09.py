@@ -54,33 +54,33 @@ alpha_max = np.pi / 2.
 
 h = 0.0001
 
-# while(alpha_max - alpha_min > 0.00001):
-#     alpha = (alpha_min + alpha_max) / 2.
-#     vx = np.cos(alpha) * v0
-#     vy = np.sin(alpha) * v0
-#     x = x0
-#     y = y0
-#     t = 0
-#     p_x = []
-#     p_y = []
-#     while(x <= x_p):
-#         p_x.append(x)
-#         p_y.append(y)
-#         x += h * vx
-#         y += h * vy
-#         (t, vx, vy) = next(Fx, Fy, vx, vy, t, h, g, k)
+while(alpha_max - alpha_min > 0.00001):
+    alpha = (alpha_min + alpha_max) / 2.
+    vx = np.cos(alpha) * v0
+    vy = np.sin(alpha) * v0
+    x = x0
+    y = y0
+    t = 0
+    p_x = []
+    p_y = []
+    while(x <= x_p):
+        p_x.append(x)
+        p_y.append(y)
+        x += h * vx
+        y += h * vy
+        (t, vx, vy) = next(Fx, Fy, vx, vy, t, h, g, k)
 
-#     if(50 - t * v_p > y):
-#         alpha_min = alpha
-#     else:
-#         alpha_max = alpha
+    if(50 - t * v_p > y):
+        alpha_min = alpha
+    else:
+        alpha_max = alpha
 
-# print 'Alpha: ' + str(round(alpha / 2 / np.pi * 360, 2))
-# print 'Höhe: '+ str(round(y, 2))
-# plt.plot(p_x, p_y)
-# plt.show()
+print 'Alpha: ' + str(round(alpha / 2 / np.pi * 360, 2))
+print 'Höhe: '+ str(round(y, 2))
+plt.plot(p_x, p_y)
+plt.show()
 
-#Um den Fallscirmspringer zu treffen muss ein  Winkel von alpha=24.3° gewählt werden. Der Fallschirmspriger wird in einer Höhe von 46.54m getroffen.
+#Um den Fallscirmspringer zu treffen muss ein  Winkel von alpha=24.8° gewählt werden. Der Fallschirmspriger wird in einer Höhe von 46.54m getroffen.
 
 #Aufgabe 9.2.1
 
@@ -155,50 +155,50 @@ def V2(x):
 x = np.arange(-8, 16, 0.01)
 plt.plot(x, V2(x))
 
-h_bar = 1
-m = 1
-h = 0.01
+# h_bar = 1
+# m = 1
+# h = 0.01
 
-P1 = []
-P2 = []
-x_min = -1
-E_min = 4.
-E_max = 5.
+# P1 = []
+# P2 = []
+# x_min = -1
+# E_min = 4.
+# E_max = 5.
 
-Phi0 = 0
-phi0 = 0.000005
+# Phi0 = 0
+# phi0 = 0.000005
 
-for i in range(10):
-    E = (E_max + E_min) / 2.
-    x = x_min
-    Phi = Phi0
-    phi = phi0
-    p_x = []
-    p_y = []
-    I = 0
-    while(x <= 9):
-        I += phi**2
-        (x, Phi, phi) = next(F1, F2, Phi, phi, x, h, (E, m, h_bar), V2)
+# for i in range(10):
+#     E = (E_max + E_min) / 2.
+#     x = x_min
+#     Phi = Phi0
+#     phi = phi0
+#     p_x = []
+#     p_y = []
+#     I = 0
+#     while(x <= 9):
+#         I += phi**2
+#         (x, Phi, phi) = next(F1, F2, Phi, phi, x, h, (E, m, h_bar), V2)
 
-    if(phi > 0):
-        E_min = E
-    else:
-        E_max = E
-    print 'E:' + str(E) + ' I:' + str(I)
+#     if(phi > 0):
+#         E_min = E
+#     else:
+#         E_max = E
+#     print 'E:' + str(E) + ' I:' + str(I)
 
-x = 0
-Phi = Phi0
-phi = phi0
-p_x = []
-p_y = []
-while(x <= 8):
-    p_x.append(x)
-    p_y.append(Phi*10e4)
-    (x, Phi, phi) = next(F1, F2, Phi, phi, x, h, (E, m, h_bar), V2)
+# x = 0
+# Phi = Phi0
+# phi = phi0
+# p_x = []
+# p_y = []
+# while(x <= 8):
+#     p_x.append(x)
+#     p_y.append(Phi*10e4)
+#     (x, Phi, phi) = next(F1, F2, Phi, phi, x, h, (E, m, h_bar), V2)
 
 
-plt.plot(p_x, p_y)
-plt.show()
+# plt.plot(p_x, p_y)
+# plt.show()
 
 #Als Energieeigenwerte wurden folgende werte ermittelt:
 #E1 = 0.44
