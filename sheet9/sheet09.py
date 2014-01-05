@@ -123,8 +123,8 @@ Phi = 10e-10
 phi = 10e-10
 p_x = []
 p_y = []
-E = 2.73
-# E = 400
+# E = 2.73
+E = 400
 while(x <= 6):
     p_x.append(x)
     p_y.append(phi)
