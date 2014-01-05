@@ -13,7 +13,7 @@ from scipy import special
 
 #Aufgabe 9.1.1:
 
-def next (Fx, Fy, vx, vy, t, h, g, k):
+def next(Fx, Fy, vx, vy, t, h, g, k):
     K1x = Fx(t, vx, vy, k, g)
     K1y = Fy(t, vx, vy, k, g)
 
@@ -54,30 +54,57 @@ alpha_max = np.pi / 2.
 
 h = 0.0001
 
-while(alpha_max - alpha_min > 0.00001):
-    alpha = (alpha_min + alpha_max) / 2.
-    vx = np.cos(alpha) * v0
-    vy = np.sin(alpha) * v0
-    x = x0
-    y = y0
-    t = 0
-    p_x = []
-    p_y = []
-    while(x <= x_p):
-        p_x.append(x)
-        p_y.append(y)
-        x += h * vx
-        y += h * vy
-        (t, vx, vy) = next(Fx, Fy, vx, vy, t, h, g, k)
+# while(alpha_max - alpha_min > 0.00001):
+#     alpha = (alpha_min + alpha_max) / 2.
+#     vx = np.cos(alpha) * v0
+#     vy = np.sin(alpha) * v0
+#     x = x0
+#     y = y0
+#     t = 0
+#     p_x = []
+#     p_y = []
+#     while(x <= x_p):
+#         p_x.append(x)
+#         p_y.append(y)
+#         x += h * vx
+#         y += h * vy
+#         (t, vx, vy) = next(Fx, Fy, vx, vy, t, h, g, k)
 
-    if(50 - t * v_p > y):
-        alpha_min = alpha
-    else:
-        alpha_max = alpha
+#     if(50 - t * v_p > y):
+#         alpha_min = alpha
+#     else:
+#         alpha_max = alpha
 
-print 'Alpha: ' + str(round(alpha / np.pi * 360, 2))
-print 'Höhe: '+ str(round(y, 2))
+# print 'Alpha: ' + str(round(alpha / np.pi * 360, 2))
+# print 'Höhe: '+ str(round(y, 2))
+# plt.plot(p_x, p_y)
+# plt.show()
+
+#Um den Fallscirmspringer zu treffen muss ein  Winkel von alpha=49.55° gewählt werden. Der Fallschirmspriger wird in einer Höhe von 46.54m getroffen.
+
+def V(x):
+    return 2.5e-4 * x**8
+
+def F1(x, Phi, phi, V, (E, m, h_bar)):
+    return phi
+
+def F2(x, Phi, phi, V, (E, m, h_bar)):
+    return 2 * m / h_bar * (V(x) - E) * Phi
+
+E = 420
+h_bar = 1
+m = 1
+h = 0.001
+x = -6.0
+Phi = 10e-10
+phi = 10e-10
+p_x = []
+p_y = []
+
+while(x <= 6):
+    p_x.append(x)
+    p_y.append(Phi)
+    (x, Phi, phi) = next(F1, F2, Phi, phi, x, h, (E, m, h_bar), V)
+
 plt.plot(p_x, p_y)
 plt.show()
-
-#Um den Fallscirmspringer zu treffen muss ein  Winkel von alpha=49.55° gewählt werden.
