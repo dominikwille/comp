@@ -199,3 +199,13 @@ while(x <= 8):
 
 plt.plot(p_x, p_y)
 plt.show()
+
+#Als Energieeigenwerte wurden folgende werte ermittelt:
+#E1 = 0.44
+#E2 = 1.54
+#E3 = 2.73
+#E4 = 4.87
+#E5 = 6.64
+
+#Noziz: Irgndwie sehen die Eigenfunktionen nicht sehr plausibel aus.... leider haben wir keinen Fehler gefunden...
+
