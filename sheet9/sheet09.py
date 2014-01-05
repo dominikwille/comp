@@ -94,44 +94,57 @@ def F1(x, Phi, phi, V, (E, m, h_bar)):
 def F2(x, Phi, phi, V, (E, m, h_bar)):
     return 2 * m * (V(x) - E) * Phi / h_bar
 
+
+
+
+h_bar = 1
+m = 1
+h = 0.01
+
 # E_min = 0
 # E_max = 100
 # while(E_max - E_min > 0.01):
 P1 = []
 P2 = []
-for E in range(100):
-    # E = (E_max - E_min) / 2.
-    h_bar = 1
-    m = 1
-    h = 0.01
-    x = -7.0
+I_min = 100000
+x_min = -6
+E_min = 8.00
+E_max = 16.00
+for i in range(100):
+    E = (E_max + E_min) / 2.
+    x = x_min
     Phi = 10e-10
     phi = 10e-10
     p_x = []
     p_y = []
-
-    while(x <= 7):
-        p_x.append(x)
-        p_y.append(phi)
+    I = 0
+    while(x <= - x_min):
+        I += phi**2
         (x, Phi, phi) = next(F1, F2, Phi, phi, x, h, (E, m, h_bar), V1)
-    
-    P1.append(E)
-    P2.append(Phi)
 
-x = -6.0
+    if(phi > 0):
+        E_min = E
+    else:
+        E_max = E
+    print 'E:' + str(E) + ' I:' + str(I)
+
+x = x_min = -5.0
 Phi = 10e-10
 phi = 10e-10
 p_x = []
 p_y = []
-# E = 2.73
-E = 400
-while(x <= 6):
+while(x <= -x_min):
     p_x.append(x)
-    p_y.append(phi)
+    p_y.append(Phi)
     (x, Phi, phi) = next(F1, F2, Phi, phi, x, h, (E, m, h_bar), V1)
 
 
-# plt.plot(P1, P2)
 plt.plot(p_x, p_y)
 plt.show()
 
+#Durch verschiede E_min und E_max wurden die folgenden Energieeigenwerte ermittelt:
+#E1 = 0.134
+#E2 = 1.120
+#E3 = 2.822
+#E4 = 5.064
+#E5 = 7.767
