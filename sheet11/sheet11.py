@@ -23,14 +23,17 @@ def f(x):
 def absF(N,f,w):
 	return np.abs(np.fft.fft(np.append(f(np.arange(0, N, 0.05)),(np.zeros(N/0.05))))*w(N,np.arange(0, 2*N, 0.05)))**2
 	
-
 	
 def absFplt(N,f,w):
-	return plt.plot(np.arange(0, N, 0.05),absF(N,f,w)[:-N/0.05])
+	return plt.plot(freq(N,w),absF(N,f,w))
 
 def w(N,i):
 	return 1
 
+def freq(N,w):
+	return np.fft.fftfreq(absF(N,f,w).size, d=0.05)	
+
+	
 def w1(N,i):
 	
 	if i >= N:
@@ -48,7 +51,8 @@ def w1(N,i):
 	else:
 		return 1
 	
-		
+	
+	
 def w2(N,i):
 	return 0.42 - 0.5 * np.cos(2*np.pi*i/N) + 0.08*np.cos(4*np.pi*i/N)
 
@@ -56,7 +60,7 @@ vw1 = np.vectorize(w1)
 	
 
 
-
+#Plot:
 #absFplt(2000.,f,w)
 #absFplt(10000.,f,w)
 #absFplt(2000.,f,w2)
@@ -88,7 +92,7 @@ def signalgen(f, tmin, tmax, dt):
 	
 signal = np.copy(signalgen(s, 0, 5, 0.02))
 
-
+#Plot:
 #x = np.arange(0, 5, 0.02)
 #plt.plot(x,signal[0])
 #plt.xlabel('t')
@@ -96,14 +100,15 @@ signal = np.copy(signalgen(s, 0, 5, 0.02))
 #plt.show()
 
 
-#absC = np.abs(np.fft.fft(np.append(signal[0],np.zeros(5./0.02))))**2
-#absN = np.abs(np.fft.fft(np.append(signal[1],np.zeros(5./0.02))))**2
-#x = np.arange(0, 5, 0.02)
-#plt.plot(x,absC[:-5./0.02],x,absC[:-5./0.02]-absN[:-5./0.02])
-#plt.xlabel('t')
-#plt.ylabel('C(t)')
+absC = np.abs(np.fft.fft(np.append(signal[0],np.zeros(5./0.02))))**2
+absN = np.abs(np.fft.fft(np.append(signal[1],np.zeros(5./0.02))))**2
+
+#Plot:
+#freq = np.fft.fftfreq(absC.size, d=0.02)
+#plt.plot(freq,absC,freq,absC-absN)
 #plt.legend(('mit Rauschen', 'ohne Rauschen'), loc=1)
 #plt.show()
 
+#ab f=0.25 nur noch Rauschen
 
-
+#phi = (absC[:-5./0.02]-absN[:-5./0.02])/absC[:-5./0.02]
