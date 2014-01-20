@@ -4,9 +4,19 @@
 # @author Dominik Wille
 # @author Stefan Pojtinger
 # @tutor Alexander Schlaich
-# @sheet 10
+# @sheet 11
 #
 #Packete einlesen:
 import numpy as np
+import csv
 import matplotlib.pyplot as plt
 from scipy import special
+
+P = []
+with open('P.txt', 'rb') as csvfile:
+     File = csv.reader(csvfile, delimiter=' ')
+     for row in File:
+         if(row[0] != '#'):
+             P.append(row)
+     
+print P[0]
