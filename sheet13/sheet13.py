@@ -111,14 +111,17 @@ def getdE(X, (y1, y2), n_element, H, J):
     if(y2 < N - 1):
         dE += - J * X[y1, y2 + 1] * n_element / 8.0
         dE -= - J * X[y1, y2 + 1] * X[y1, y2] / 8.0
+    return dE
 
 def metropolis((x1, x2), X, kT, H, J=1.0, r=1.0, steps=10):
     N = len(X)
+
     for i in range(steps):
         (q1, q2) = (int(round(rnd.random() * 2 * r - r)), int(round(rnd.random() * 2 * r - r)))
         (y1, y2) = (repeat(x1 + q1, N), repeat(x2 + q2, N))
         n_element = flip(X[y1,y2])
         dE = getdE(X, (y1, y2), n_element, H, J)
+        dM = n_element - X[y1, y2]
         if(dE < 0):
             X[y1, y2] = n_element
             (x1, x2) = (y1, y2)
@@ -127,12 +130,74 @@ def metropolis((x1, x2), X, kT, H, J=1.0, r=1.0, steps=10):
             if(rnd.random() < p_A):
                 X[y1, y2] = n_element
                 (x1, x2) = (y1, y2)
-        
+
     return X
 
-N = 10
-X = rand_m(N)
-print metropolis((4, 4), X, 10e-3, 0, steps=25000)
+def getM(X):
+    N = len(X)
+    M = 0
+    for i in range(N):
+        for j in range(N):
+            M += X[i,j]
+    return M / 2.0
 
-plt.imshow(X, extent=(0, N, N, 0), interpolation='nearest', cmap=plt.cm.jet)
+def getE(X, H):
+    # print H
+    N = len(X)
+    E = 0
+    for i in range(N):
+        for j in range(N):
+            E += -H * X[i,j] / 2.0
+            if(i > 0):
+                E += -X[i - 1, j] * X[i,j] / 8.0
+            if(i < N - 1):
+                E += -X[i + 1, j] * X[i,j] / 8.0
+            if(j > 0):
+                E += -X[i, j - 1] * X[i,j] / 8.0
+            if(j < N - 1):
+                E += -X[i, j + 1] * X[i,j] / 8.0
+    return E
+
+N = 10
+kT_list = [1e-3, 1e-1, 1.0, 2.0, 5.0, 10.0, 100.0]
+H_list = [0, 0.1, 1.0]
+
+# X = rand_m(N)
+# kT = kT_list[6]
+# H = H_list[2]
+# (X, E, M) = metropolis((4, 4), X, kT, H, steps=25000)
+# plt.imshow(X, extent=(0, N, N, 0), interpolation='nearest', cmap=plt.cm.jet)
+# plt.title('$H = ' + str(H) + '\,\,\,;\,\,\, kT = ' + str(kT) + '$')
+# plt.show()
+
+
+E = []
+M = []
+E_ = 0
+M_ = 0
+H = H_list[2]
+times = 10
+for kT in kT_list:
+    for n in range(times):
+        X = rand_m(N)
+        X = metropolis((4, 4), X, kT, H, steps=25000)
+        print str(kT) + ', ' + str(H) + ', ' + str(getE(X, H)) + ', ' + str(getM(X))
+        M_ += getM(X) / times
+        E_ += getE(X, H) / times
+
+    M.append(M_)
+    E.append(E_)
+    
+
+
+plt.plot(kT_list, E)
+plt.plot(kT_list, M)
+plt.legend(['E', 'M'])
+plt.xscale('log')
+plt.title('$H = ' + str(H) + '$')
+plt.xlabel('$kT$')
+plt.ylabel('$M/E$')
 plt.show()
+
+
+
